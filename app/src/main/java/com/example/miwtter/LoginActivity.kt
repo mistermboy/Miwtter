@@ -13,21 +13,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
-
-
-        Log.i("INFO",binding.loginBtn.text.toString())
-        binding.loginBtn.setOnClickListener{
-            Log.i("INFO","CLICK")
-            Log.i("INFO","CLICK")
-            Log.i("INFO","CLICK")
-            Log.i("INFO","CLICK")
-            Log.i("INFO","CLICK")
-
-            val intent = Intent(this,SignUpActivity::class.java)
-            startActivity(intent)
-        }
-
+        setContentView(binding.root)
+        binding.signUpTxt.setOnClickListener{ startActivity(Intent(this,SignUpActivity::class.java)) }
     }
 }
