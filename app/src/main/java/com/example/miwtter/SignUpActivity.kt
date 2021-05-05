@@ -1,4 +1,4 @@
-package com.example.miw.ui
+package com.example.miwtter
 
 import android.content.Intent
 import android.os.Bundle
