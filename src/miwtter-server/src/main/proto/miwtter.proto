@@ -1,0 +1,159 @@
+syntax = "proto3";
+
+option java_package = "es.uniovi.miw.miwtter";
+
+package miwtter;
+
+///////////////////////////////////////////////////////
+// USERS SERVICE
+///////////////////////////////////////////////////////
+
+/**
+ * The user service manages the registration and the login of the users.
+ */
+service UsersService {
+    rpc Register(RegisterUserRequest) returns (RegisterUserResponse) {}
+    rpc Login(LoginUserRequest) returns (LoginUserResponse) {}
+    rpc Find(FindUserRequest) returns (FindUserResponse) {}
+}
+
+message RegisterUserRequest {
+    string name             = 1;
+    string surname          = 2;
+    string username         = 3;
+    string password         = 4;
+    string repeatedPassword = 5;
+}
+
+message RegisterUserResponse {
+    enum ResponseStatus {
+        USER_CREATED                                = 0;
+        USERNAME_ALREADY_EXISTS                     = 1;
+        PASSWORD_NOT_MATCH_WITH_REPEATED_PASSWORD   = 2;
+    }
+    ResponseStatus responseStatus   = 1;
+    string errorMessage             = 2;
+}
+
+message LoginUserRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message LoginUserResponse {
+    enum ResponseStatus {
+        SUCCESS                         = 0;
+        INCORRECT_USERNAME_OR_PASSWORD  = 1;
+    }
+    ResponseStatus responseStatus   = 1;
+}
+
+message FindUserRequest {
+    string query = 1;
+}
+
+message FindUserResponse {
+    repeated User user = 1;
+}
+
+message User {
+    string name = 1;
+    string surname = 2;
+    string username = 3;
+    string creationDate = 4;
+}
+
+///////////////////////////////////////////////////////
+// POSTS SERVICE
+///////////////////////////////////////////////////////
+
+/**
+ * The posts service has the responsibility of creating posts and managing the
+ * like and unlike actions.
+ */
+service PostsService {
+    rpc Create(CreatePostRequest) returns (CreatePostResponse) {}
+    rpc Like(LikePostRequest) returns (LikePostResponse) {}
+    rpc RemoveLike(RemoveLikeRequest) returns (RemoveLikeResponse) {}
+}
+
+message CreatePostRequest {
+    string username = 1;
+    string content  = 2;
+}
+
+message CreatePostResponse {
+    enum ResponseStatus {
+        POST_CREATED    = 0;
+        USER_NOT_FOUND  = 1;
+    }
+    ResponseStatus responseStatus   = 1;
+}
+
+message LikePostRequest {
+    string username = 1;
+    string postId   = 2;
+}
+
+message LikePostResponse {
+    enum ResponseStatus {
+        LIKE_CREATED    = 0;
+        USER_NOT_FOUND  = 1;
+        POST_NOT_FOUND  = 2;
+    }
+    ResponseStatus responseStatus   = 1;
+}
+
+message RemoveLikeRequest {
+    string username = 1;
+    string postId   = 2;
+}
+
+message RemoveLikeResponse {
+    enum ResponseStatus {
+        LIKE_REMOVED    = 0;
+        USER_NOT_FOUND  = 1;
+        POST_NOT_FOUND  = 2;
+    }
+    ResponseStatus responseStatus   = 1;
+}
+
+///////////////////////////////////////////////////////
+// FEED SERVICE
+///////////////////////////////////////////////////////
+
+/**
+ * The feed service gets the feed. At the moment it will get all the posts of the system
+ * but it whould be customized for each user. That's the reason why it should be on a separate
+ * service.
+ */
+service FeedService {
+    rpc Get(GetFeedRequest) returns (GetFeedResponse) {}
+}
+
+message GetFeedRequest {
+    string username = 1;
+}
+
+message GetFeedResponse {
+    enum ResponseStatus {
+        FEED_FOUND    = 0;
+        USER_NOT_FOUND  = 1;
+    }
+    ResponseStatus responseStatus   = 1;
+    repeated Post posts = 2;
+}
+
+/**
+ * A post models the data (content) and metadata of a single "miweet", very similar to a tweet.
+ * - The post id identifies the post, for reference purposes.
+ * - The content contains the plain content of the post.
+ * - The creation date coded as a string that contains a long with the creation date encoded.
+ * - The owner username contains the username of the owner that created the miweet
+ */
+message Post {
+    string postId = 1;
+    string content = 2;
+    string creationDate = 3;
+    string ownerUsername = 4;
+}
