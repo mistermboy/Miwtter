@@ -20,7 +20,7 @@
         android:layout_marginTop="235dp"
         android:layout_marginEnd="24dp"
         android:hint="@string/prompt_name"
-        android:inputType="textEmailAddress"
+        app:errorEnabled="true"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,6 @@
         android:layout_marginTop="300dp"
         android:layout_marginEnd="24dp"
         android:hint="@string/prompt_surname"
-        android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +61,6 @@
         android:layout_marginTop="365dp"
         android:layout_marginEnd="24dp"
         android:hint="@string/prompt_username"
-        android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,6 +86,7 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:passwordToggleEnabled="true"
         app:layout_constraintTop_toBottomOf="@+id/username" >
 
         <com.google.android.material.textfield.TextInputEditText
