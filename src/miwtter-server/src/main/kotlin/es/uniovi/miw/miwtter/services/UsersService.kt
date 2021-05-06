@@ -9,7 +9,7 @@ import io.grpc.stub.StreamObserver
 class UsersService : UsersServiceGrpc.UsersServiceImplBase() {
 
     override fun register(request: Miwtter.RegisterUserRequest, responseObserver: StreamObserver<Miwtter.RegisterUserResponse>) {
-
+/*
         // 1. Check the request data.
         if(!request.password.contentEquals(request.repeatedPassword)) {
             val response = Miwtter.RegisterUserResponse.newBuilder()
@@ -40,10 +40,11 @@ class UsersService : UsersServiceGrpc.UsersServiceImplBase() {
             .build()
         responseObserver.onNext(response)
         return responseObserver.onCompleted()
+        */
     }
 
     override fun login(request: Miwtter.LoginUserRequest, responseObserver: StreamObserver<Miwtter.LoginUserResponse>) {
-
+/*
         // 1. Check if the user exists in the database.
         val isUserRegistered = MiwtterDatabaseRedisAdapter.loginUser(LoginData(username = request.username, password = request.password))
 
@@ -61,13 +62,17 @@ class UsersService : UsersServiceGrpc.UsersServiceImplBase() {
             responseObserver.onNext(response)
             responseObserver.onCompleted()
         }
+
+ */
     }
 
-    override fun find(request: Miwtter.FindUserRequest, responseObserver: StreamObserver<Miwtter.FindUserResponse>?) {
-
+    override fun find(request: Miwtter.FindUserRequest, responseObserver: StreamObserver<Miwtter.FindUserResponse>) {
+/*
         // 1. Check the request data.
         if(request.query.isEmpty()) {
             val response = Miwtter.FindUserResponse.newBuilder()
         }
+
+ */
     }
 }

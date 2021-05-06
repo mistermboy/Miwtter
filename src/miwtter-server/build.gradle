@@ -59,12 +59,12 @@ sourceSets {
 }
 
 task runServer(type: JavaExec) {
-    classpath = sourceSets.main.runtimeClasspath
-    main = 'es.uniovi.miw.miwtter.Server'
+    classpath = sourceSets["main"].runtimeClasspath
+    main = 'es.uniovi.miw.miwtter.MiwtterServerKt'
 }
 
 task authServer(type: CreateStartScripts) {
-    mainClassName = "es.uniovi.miw.miwtter.Server'"
+    mainClassName = "es.uniovi.miw.miwtter.MiwtterServer"
     applicationName = "miwtter-server"
     outputDir = new File(project.buildDir, 'tmp')
     classpath = jar.outputs.files + project.configurations.runtime

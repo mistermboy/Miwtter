@@ -43,6 +43,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
 }
 
 dependencies {
@@ -64,7 +65,7 @@ dependencies {
     compile "io.grpc:grpc-stub:${grpcVersion}"
     compile group: 'com.google.protobuf', name: 'protobuf-java-util', version: '3.12.2'*/
 
-    implementation 'io.grpc:grpc-okhttp:1.27.0'
+    implementation 'io.grpc:grpc-netty:1.27.0'
     implementation 'io.grpc:grpc-protobuf-lite:1.27.0' // CURRENT_GRPC_VERSION
     implementation 'io.grpc:grpc-stub:1.27.0' // CURRENT_GRPC_VERSION
 
@@ -83,16 +84,6 @@ dependencies {
 
     implementation 'com.github.jd-alexander:LikeButton:0.2.3'
 }
-
-/*protobuf {
-    protoc { artifact = "com.google.protobuf:protoc:${protocVersion}" }
-    plugins {
-        grpc { artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}" }
-    }
-    generateProtoTasks {
-        all()*.plugins { grpc {} }
-    }
-}*/
 
 protobuf {
     protoc { artifact = "com.google.protobuf:protoc:${protocVersion}" }
