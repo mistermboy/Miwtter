@@ -36,7 +36,7 @@ class MiwtterServer(private val port: Int) {
 }
 
 fun main() {
-    val port = System.getenv("PORT")?.toInt() ?: 50051
+    val port = System.getenv("PORT")?.toInt() ?: 80
     val server = MiwtterServer(port)
     server.start()
     server.blockUntilShutdown()
