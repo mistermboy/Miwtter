@@ -15,7 +15,7 @@ import java.lang.IllegalStateException
  * connects. The default value for this field is 'api.miwtter.miw.wcr.es'. This endpoint should
  * be available at least until July 15, 2021.
  */
-class UsersServiceClient(apiServerAddress: String = "http://api.miwtter.miw.wcr.es") {
+class UsersServiceClient(apiServerAddress: String = "api.miwtter.miw.wcr.es:80") {
 
     private val usersServiceStub: UsersServiceGrpc.UsersServiceBlockingStub
 
@@ -29,8 +29,9 @@ class UsersServiceClient(apiServerAddress: String = "http://api.miwtter.miw.wcr.
         usersServiceStub = UsersServiceGrpc.newBlockingStub(channel)
 
         // Check the connection
-        val connectionState = channel.getState(true)
-        if (!connectionState.equals(ConnectivityState.READY)) throw IllegalStateException("The server [$apiServerAddress] is not reachable. Current state [$connectionState].")
+        val connectionState = channel.getState(false)
+        if (! (connectionState.equals(ConnectivityState.READY) || connectionState.equals(ConnectivityState.IDLE)))
+            throw IllegalStateException("The server [$apiServerAddress] is not reachable. Current state [$connectionState].")
     }
 
     /**
