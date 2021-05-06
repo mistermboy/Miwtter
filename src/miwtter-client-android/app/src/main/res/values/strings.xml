@@ -16,4 +16,7 @@
     <string name="prompt_surname">Surname</string>
 
     <string name="degrees">%1$.1fº</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Favorites</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

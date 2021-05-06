@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_feed">
+
+    <fragment
+        android:id="@+id/navigation_feed"
+        android:name="com.example.miwtter.ui.feed.FeedFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/feed_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_fav"
+        android:name="com.example.miwtter.ui.fav.FavFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fav_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.miwtter.ui.fav.FavFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/profile_fragment" />
+
+
+</navigation>
