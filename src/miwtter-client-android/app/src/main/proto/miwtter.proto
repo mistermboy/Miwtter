@@ -72,15 +72,9 @@ message FullUserData {
 
 message UserPost {
     string postId               = 1;
-    string postContent          = 2;
-    string numberOfLikes        = 3;
-    repeated PostLike postLikes = 4;
-}
-
-message PostLike {
-    string name     = 1;
-    string surname  = 2;
-    string username = 3;
+    string ownerUsername        = 2;
+    string postContent          = 3;
+    string numberOfLikes        = 4;
 }
 
 ///////////////////////////////////////////////////////
@@ -170,11 +164,4 @@ message FeedPost {
     string ownerUsername = 2;
     string content = 3;
     int32 numberOfLikes = 4;
-    repeated FeedPostLikes  likes = 5;
-}
-
-message FeedPostLikes {
-    string name = 1;
-    string surname = 2;
-    string username = 3;
 }
