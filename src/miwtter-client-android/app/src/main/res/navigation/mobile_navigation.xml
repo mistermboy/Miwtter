@@ -14,13 +14,13 @@
     <fragment
         android:id="@+id/navigation_fav"
         android:name="com.example.miwtter.ui.fav.FavFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_fav"
         tools:layout="@layout/fav_fragment" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.miwtter.ui.fav.FavFragment"
-        android:label="@string/title_dashboard"
+        android:name="com.example.miwtter.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
         tools:layout="@layout/profile_fragment" />
 
 

@@ -1,25 +1,23 @@
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="110dp"
-    android:layout_margin="8dp"
-    card_view:cardElevation="4dp"
-    card_view:cardBackgroundColor="@color/white"
-    card_view:cardCornerRadius="8dp">
+    android:layout_height="140dp"
+    card_view:cardElevation="2dp"
+    android:layout_marginBottom="1dp">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/username_txt"
-            android:layout_width="97dp"
-            android:layout_height="21dp"
+            android:layout_width="112dp"
+            android:layout_height="24dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:text="Pablo Iglesias"
-            android:textSize="15dp"
+            android:textSize="16dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toEndOf="@+id/imageView2"
             card_view:layout_constraintTop_toTopOf="parent"
@@ -27,46 +25,80 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="91dp"
-            android:layout_height="105dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:src="@drawable/miwter_logo"
+            android:layout_width="74dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:background="@drawable/img"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintVertical_bias="0.0"
-            tools:srcCompat="@tools:sample/avatars" />
+            card_view:layout_constraintVertical_bias="0.078" />
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="84dp"
-            android:layout_height="18dp"
+            android:layout_width="99dp"
+            android:layout_height="24dp"
             android:layout_marginEnd="112dp"
             android:layout_marginRight="112dp"
             android:text="\@pabloiglesias"
-            android:textSize="10dp"
+            android:textSize="14dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintStart_toEndOf="@+id/username_txt"
             card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintVertical_bias="0.06" />
+            card_view:layout_constraintVertical_bias="0.034" />
 
         <TextView
             android:id="@+id/tweet_text"
-            android:layout_width="195dp"
-            android:layout_height="86dp"
+            android:layout_width="274dp"
+            android:layout_height="78dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:text="La democracia es un patrimonio de los de abajo para disputarle el poder a las elites y convertir los privilegios de unos pocos en derechos para todos. #QueVoteLaMayoría el 4 de mayo, en defensa de los servicios públicos y los derechos sociales, en defensa de la democracia."
-            android:textSize="9dp"
+            android:textSize="11dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintStart_toEndOf="@+id/imageView2"
-            card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintVertical_bias="1.0" />
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <com.like.LikeButton
+            android:id="@+id/heart_button"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:background="@android:color/transparent"
+            card_view:dots_primary_color="@color/twitterBlue"
+            card_view:dots_secondary_color="@color/twitterBlueDarker"
+            card_view:icon_size="10dp"
+            card_view:icon_type="heart"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.832"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/tweet_text"
+            card_view:layout_constraintVertical_bias="0.0"
+            card_view:like_drawable="@drawable/heart_like"
+            card_view:unlike_drawable="@drawable/heart_unlike" />
+
+        <com.like.LikeButton
+            android:id="@+id/star_button"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:background="@android:color/transparent"
+            card_view:dots_primary_color="@color/twitterBlue"
+            card_view:dots_secondary_color="@color/twitterBlueDarker"
+            card_view:icon_size="10dp"
+            card_view:icon_type="star"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.679"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/tweet_text"
+            card_view:layout_constraintVertical_bias="0.0"
+            card_view:like_drawable="@drawable/star_like"
+            card_view:unlike_drawable="@drawable/star_unlike" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
