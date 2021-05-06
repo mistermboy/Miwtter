@@ -61,7 +61,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="365dp"
         android:layout_marginEnd="24dp"
-        android:hint="@string/prompt_email"
+        android:hint="@string/prompt_username"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -172,7 +172,7 @@
         app:layout_constraintVertical_bias="0.259" />
 
     <TextView
-        android:id="@+id/sign_up_txt"
+        android:id="@+id/login_txt"
         android:layout_width="102dp"
         android:layout_height="22dp"
         android:layout_marginBottom="88dp"
