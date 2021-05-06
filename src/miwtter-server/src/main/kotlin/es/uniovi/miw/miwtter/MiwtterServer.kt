@@ -1,5 +1,6 @@
 package es.uniovi.miw.miwtter
 
+import es.uniovi.miw.miwtter.features.*
 import es.uniovi.miw.miwtter.services.UsersService
 import io.grpc.Server
 import io.grpc.ServerBuilder
@@ -9,9 +10,16 @@ class MiwtterServer(private val port: Int) {
 
     private val logger = KotlinLogging.logger(this.javaClass.canonicalName)
 
+    // REMEMBER TO ALWAYS REGISTER THE SERVICES HERE!!!!
+    // For more help: https://github.com/alejgh/easidiomas/blob/main/src/authenticationservice/src/main/java/com/easidiomas/auth/AuthServer.java
     private val server: Server = ServerBuilder
         .forPort(port)
-        .addService(UsersService())
+        .addService(AddLikeToPost())
+        .addService(CreatePost())
+        .addService(GetFeedForUser())
+        .addService(LoginUser())
+        .addService(RegisterUser())
+        .addService(RemoveLikeFromPost())
         .build()
 
     fun start() {

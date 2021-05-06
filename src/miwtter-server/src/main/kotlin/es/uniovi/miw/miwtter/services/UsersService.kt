@@ -2,8 +2,6 @@ package es.uniovi.miw.miwtter.services
 
 import es.uniovi.miw.miwtter.Miwtter
 import es.uniovi.miw.miwtter.UsersServiceGrpc
-import es.uniovi.miw.miwtter.database.adapters.MiwtterDatabaseRedisAdapter
-import es.uniovi.miw.miwtter.features.authentication.login.LoginData
 import io.grpc.stub.StreamObserver
 
 class UsersService : UsersServiceGrpc.UsersServiceImplBase() {

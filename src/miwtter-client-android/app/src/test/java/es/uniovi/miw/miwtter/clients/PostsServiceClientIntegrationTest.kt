@@ -1,7 +1,6 @@
 package es.uniovi.miw.miwtter.clients
 
-import es.uniovi.miw.miwtter.clients.PostServiceClient
-import junit.framework.Assert.fail
+import org.junit.Assert.fail
 import org.junit.Test
 import java.lang.Exception
 
