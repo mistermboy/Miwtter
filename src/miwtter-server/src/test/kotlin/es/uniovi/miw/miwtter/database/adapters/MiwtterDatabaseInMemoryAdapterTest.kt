@@ -129,4 +129,56 @@ class MiwtterDatabaseInMemoryAdapterTest {
         val badResponse = this.database.addLikeToPost(badAddLikeToPostRequest)
         Assertions.assertEquals(Miwtter.LikePostResponse.ResponseStatus.USER_NOT_FOUND, badResponse.responseStatus)
     }
+
+    @Test
+    fun getUserInfoTest() {
+        var findRequest = Miwtter.FindUserRequest.newBuilder()
+            .setUsername("user1")
+            .setFindPolicy(Miwtter.FindUserRequest.FindPolicy.OR)
+            .build()
+        var response = this.database.findUserByFreeText(findRequest)
+        Assertions.assertEquals(1, response.userCount)
+        Assertions.assertEquals(1, response.userList[0].userPostsList.size)
+
+        val createPostRequest = Miwtter.CreatePostRequest.newBuilder()
+            .setActorUsername("user1")
+            .setContent("Hi!")
+            .build()
+        this.database.createPost(createPostRequest)
+        this.database.createPost(createPostRequest)
+
+        response = this.database.findUserByFreeText(findRequest)
+        Assertions.assertEquals(3, response.userList[0].userPostsList.size)
+
+        val postId = response.userList[0].userPostsList[0].postId
+        val addLikeToPostRequest = Miwtter.LikePostRequest.newBuilder()
+            .setPostId(postId)
+            .setActorUsername("user2")
+            .build()
+        this.database.addLikeToPost(addLikeToPostRequest)
+
+        response = this.database.findUserByFreeText(findRequest)
+        println(response.userList[0].userPostsList)
+        Assertions.assertEquals("1", response.userList[0].userPostsList[0].numberOfLikes)
+
+        findRequest = Miwtter.FindUserRequest.newBuilder()
+            .setUsername("user1")
+            .setFindPolicy(Miwtter.FindUserRequest.FindPolicy.OR)
+            .build()
+
+        // Repeating the like should not affect the number of likes
+        this.database.addLikeToPost(addLikeToPostRequest)
+        response = this.database.findUserByFreeText(findRequest)
+        Assertions.assertEquals("1", response.userList[0].userPostsList[0].numberOfLikes)
+
+        // Removing the like
+        val removeRequest = Miwtter.RemoveLikeRequest.newBuilder()
+            .setPostId(postId)
+            .setActorUsername("user2")
+            .build()
+        this.database.removeLike(removeRequest)
+
+        response = this.database.findUserByFreeText(findRequest)
+        Assertions.assertEquals("0", response.userList[0].userPostsList[0].numberOfLikes)
+    }
 }

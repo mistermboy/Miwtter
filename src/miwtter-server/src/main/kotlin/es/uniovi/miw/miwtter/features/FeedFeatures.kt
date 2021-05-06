@@ -5,7 +5,7 @@ import es.uniovi.miw.miwtter.Miwtter
 import es.uniovi.miw.miwtter.database.adapters.MiwtterDatabaseInMemoryAdapter
 import io.grpc.stub.StreamObserver
 
-class GetFeedForUser: FeedServiceGrpc.FeedServiceImplBase() {
+class FeedFeatures: FeedServiceGrpc.FeedServiceImplBase() {
 
     override fun get(request: Miwtter.GetFeedRequest, responseObserver: StreamObserver<Miwtter.GetFeedResponse>) {
         val response = MiwtterDatabaseInMemoryAdapter.getFeedForUser(request)
