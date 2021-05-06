@@ -27,6 +27,7 @@ class SignUpActivity : AppCompatActivity() {
         binding.loginTxt.setOnClickListener{ startActivity(Intent(this,LoginActivity::class.java)) }
         binding.siginBtn.setOnClickListener{
 
+
             if (isValid()) {
                 val service = UsersServiceClient()
                 val name = binding.name.editText?.text.toString()
@@ -45,14 +46,13 @@ class SignUpActivity : AppCompatActivity() {
                     Miwtter.RegisterUserResponse.ResponseStatus.USER_CREATED -> {
                         Log.i("USER_CREATED", "Name: " + name + " Surname: " + surname + " Username: " + username + " Password: " + password)
                         startActivity(Intent(this, LoginActivity::class.java))
+                        Toast.makeText(this, "Succesfully registered!", Toast.LENGTH_SHORT).show()
                     }
                     Miwtter.RegisterUserResponse.ResponseStatus.USERNAME_ALREADY_EXISTS ->{
                         binding.username.error = "Username already exists"
                         binding.username.requestFocus()
                     }
                 }
-            }else {
-                Toast.makeText(this, "errors", Toast.LENGTH_SHORT).show()
             }
 
         }

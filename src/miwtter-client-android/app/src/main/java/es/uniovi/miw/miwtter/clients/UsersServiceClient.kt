@@ -22,8 +22,8 @@ class UsersServiceClient(apiServerAddress: String = "api.miwtter.miw.wcr.es:5000
     init {
         // Create the communication channel.
         val channel = ManagedChannelBuilder.forTarget(apiServerAddress)
-            .usePlaintext()
-            .build()
+                .usePlaintext()
+                .build()
 
         // Create the stub.
         usersServiceStub = UsersServiceGrpc.newBlockingStub(channel)
@@ -41,7 +41,7 @@ class UsersServiceClient(apiServerAddress: String = "api.miwtter.miw.wcr.es:5000
      * @return the response that the gRPC server generated.
      */
     fun register(request: Miwtter.RegisterUserRequest): Miwtter.RegisterUserResponse =
-        usersServiceStub.register(request)
+            usersServiceStub.register(request)
 
     /**
      * Routes the login request to the corresponding register method of the stub.
@@ -50,7 +50,7 @@ class UsersServiceClient(apiServerAddress: String = "api.miwtter.miw.wcr.es:5000
      * @return the response that the gRPC server generated.
      */
     fun login(request: Miwtter.LoginUserRequest): Miwtter.LoginUserResponse =
-        usersServiceStub.login(request)
+            usersServiceStub.login(request)
 
     /**
      * Routes the find request to the corresponding register method of the stub.
@@ -59,5 +59,5 @@ class UsersServiceClient(apiServerAddress: String = "api.miwtter.miw.wcr.es:5000
      * @return the response that the gRPC server generated.
      */
     fun find(request: Miwtter.FindUserRequest): Miwtter.FindUserResponse =
-        usersServiceStub.find(request)
+            usersServiceStub.find(request)
 }

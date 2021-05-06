@@ -42,6 +42,7 @@
         android:layout_marginEnd="24dp"
         android:hint="@string/prompt_surname"
         android:selectAllOnFocus="true"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
@@ -62,6 +63,7 @@
         android:layout_marginEnd="24dp"
         android:hint="@string/prompt_username"
         android:selectAllOnFocus="true"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
@@ -80,6 +82,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:hint="@string/prompt_password"
+        app:errorEnabled="true"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
