@@ -1,10 +1,6 @@
 package es.uniovi.miw.miwtter.database
 
 import es.uniovi.miw.miwtter.Miwtter
-import es.uniovi.miw.miwtter.database.domain.Post
-import es.uniovi.miw.miwtter.database.domain.User
-import es.uniovi.miw.miwtter.features.authentication.login.LoginData
-import es.uniovi.miw.miwtter.features.feed.CreatePostData
 
 interface MiwtterDatabase {
 
@@ -18,7 +14,7 @@ interface MiwtterDatabase {
 
     fun addLikeToPost(request: Miwtter.LikePostRequest): Miwtter.LikePostResponse
 
-    fun removeLike(request: Miwtter.RemoveLikeRequest): Miwtter.RegisterUserResponse
+    fun removeLike(request: Miwtter.RemoveLikeRequest): Miwtter.RemoveLikeResponse
 
     fun getFeedForUser(request: Miwtter.GetFeedRequest): Miwtter.GetFeedResponse
 }
