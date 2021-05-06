@@ -63,6 +63,7 @@ object MiwtterDatabaseInMemoryAdapter : MiwtterDatabase {
                 .setResponseStatus(Miwtter.LoginUserResponse.ResponseStatus.INCORRECT_USERNAME_OR_PASSWORD)
                 .build()
         } else {
+            logger.info("Login successful")
             return Miwtter.LoginUserResponse.newBuilder()
                 .setResponseStatus(Miwtter.LoginUserResponse.ResponseStatus.SUCCESS)
                 .build()
@@ -70,7 +71,46 @@ object MiwtterDatabaseInMemoryAdapter : MiwtterDatabase {
     }
 
     override fun findUserByFreeText(request: Miwtter.FindUserRequest): Miwtter.FindUserResponse {
-        TODO("Not yet implemented")
+        val dbUser = this.findUser(request.username)
+
+        return if(dbUser != null) {
+            val userFeedPosts = this.posts.filter {
+                post -> post.ownerUsername.contentEquals(dbUser.username)
+            }.map {
+                post -> Miwtter.UserPost.newBuilder()
+                .setPostId(post.id)
+                .setOwnerUsername(post.ownerUsername)
+                .setPostContent(post.content)
+                .setNumberOfLikes(post.numberOfLikes.toString())
+                .build()
+            }
+
+            val userLikedPosts = dbUser.likedPosts.map {
+                post -> Miwtter.FeedPost.newBuilder()
+                .setPostId(post.id)
+                .setOwnerUsername(post.ownerUsername)
+                .setNumberOfLikes(post.numberOfLikes)
+                .setContent(post.content)
+                .build()
+            }
+
+            logger.info { "[${userFeedPosts.size}] posts found for user [${dbUser.username}]" }
+
+            val fullUserData = Miwtter.FullUserData.newBuilder()
+                .setName(dbUser.name)
+                .setSurname(dbUser.surname)
+                .setUsername(dbUser.username)
+                .addAllUserPosts(userFeedPosts)
+                .addAllLikedPosts(userLikedPosts)
+                .build()
+
+            Miwtter.FindUserResponse.newBuilder()
+                .addUser(fullUserData)
+                .build()
+        } else {
+            Miwtter.FindUserResponse.newBuilder()
+                .build()
+        }
     }
 
     override fun createPost(request: Miwtter.CreatePostRequest): Miwtter.CreatePostResponse {
@@ -94,13 +134,18 @@ object MiwtterDatabaseInMemoryAdapter : MiwtterDatabase {
             Miwtter.LikePostResponse.newBuilder()
                 .setResponseStatus(Miwtter.LikePostResponse.ResponseStatus.POST_NOT_FOUND)
                 .build()
-        } else if(dbUser == null){
+        } else if(dbUser == null) {
             Miwtter.LikePostResponse.newBuilder()
                 .setResponseStatus(Miwtter.LikePostResponse.ResponseStatus.USER_NOT_FOUND)
                 .build()
+        } else if(dbUser.likedPosts.contains(dbPost)) {
+            Miwtter.LikePostResponse.newBuilder()
+                .setResponseStatus(Miwtter.LikePostResponse.ResponseStatus.LIKE_CREATED)
+                .build()
         } else {
-            dbPost.numberOfLikes.inc()
-            dbUser.likedPosts += dbPost
+            logger.info { "Adding a like to the post [${request.postId}] by user [${request.actorUsername}]. Moving from [${dbPost.numberOfLikes}] -> [${dbPost.numberOfLikes + 1}]" }
+            dbPost.numberOfLikes = dbPost.numberOfLikes + 1
+            dbUser.likedPosts.add(dbPost)
             Miwtter.LikePostResponse.newBuilder()
                 .setResponseStatus(Miwtter.LikePostResponse.ResponseStatus.LIKE_CREATED)
                 .build()
@@ -124,8 +169,8 @@ object MiwtterDatabaseInMemoryAdapter : MiwtterDatabase {
                 .setResponseStatus(Miwtter.RemoveLikeResponse.ResponseStatus.LIKE_DID_NOT_EXISTS)
                 .build()
         } else {
-            dbPost.numberOfLikes.inc()
-            dbUser.likedPosts += dbPost
+            dbPost.numberOfLikes = dbPost.numberOfLikes - 1
+            dbUser.likedPosts.remove(dbPost)
             Miwtter.RemoveLikeResponse.newBuilder()
                 .setResponseStatus(Miwtter.RemoveLikeResponse.ResponseStatus.LIKE_REMOVED)
                 .build()
