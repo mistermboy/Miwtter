@@ -4,16 +4,32 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.danimeana.weatherapp.FeedListAdapter
+import com.danimeana.weatherapp.Tweet
 import com.example.miwtter.R
-import com.example.miwtter.databinding.ActivityHomeBinding
 
 class FeedFragment : Fragment() {
+
+    private val items = listOf(
+        Tweet("Lunes, 03 de mayo del 20201", "Lluvioso", 4f, 13f),
+        Tweet("Martes, 04 de mayo del 20201", "Cubierto", 5f, 15f),
+        Tweet("Miércoles, 05 de mayo del 20201", "Cubierto", 7f, 17f),
+        Tweet("Jueves, 06 de mayo del 20201", "Lluvioso", 5f, 14f),
+        Tweet("Jueves, 06 de mayo del 20201", "Lluvioso", 5f, 14f),
+        Tweet("Jueves, 06 de mayo del 20201", "Lluvioso", 5f, 14f),
+        Tweet("Jueves, 06 de mayo del 20201", "Lluvioso", 5f, 14f),
+        Tweet("Jueves, 06 de mayo del 20201", "Lluvioso", 5f, 14f),
+        Tweet("Jueves, 06 de mayo del 20201", "Lluvioso", 5f, 14f),
+        Tweet("Jueves, 06 de mayo del 20201", "Lluvioso", 5f, 14f),
+        Tweet("Jueves, 06 de mayo del 20201", "Lluvioso", 5f, 14f),
+        Tweet("Jueves, 06 de mayo del 20201", "Lluvioso", 5f, 14f),
+        Tweet("Jueves, 06 de mayo del 20201", "Lluvioso", 5f, 14f),
+        Tweet("Viernes, 07 de mayo del 20201", "Despejado", 10f, 21f)
+    )
 
     private lateinit var feedViewModel: FeedViewModel
 
@@ -24,11 +40,10 @@ class FeedFragment : Fragment() {
     ): View? {
         feedViewModel =
             ViewModelProvider(this).get(FeedViewModel::class.java)
-        val root = inflater.inflate(R.layout.feed_fragment, container, false)
-
-        //binding.feedList.layoutManager = LinearLayoutManager(this)
-        //binding.feedList.adapter = FeedListAdapter(items)
-
-        return root
+        val view = inflater.inflate(R.layout.feed_fragment, container, false)
+        val feedList: RecyclerView = view.findViewById(R.id.feedList)
+        feedList.layoutManager = LinearLayoutManager(activity)
+        feedList.adapter = FeedListAdapter(items)
+        return view
     }
 }
