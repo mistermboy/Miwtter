@@ -1,13 +1,13 @@
 package es.uniovi.miw.miwtter.clients
 
 import es.uniovi.miw.miwtter.Miwtter
-import es.uniovi.miw.miwtter.UsersServiceGrpc
+import es.uniovi.miw.miwtter.PostsServiceGrpc
 import io.grpc.ConnectivityState
 import io.grpc.ManagedChannelBuilder
 import java.lang.IllegalStateException
 
 /**
- * The user service client acts as a facade of the gRPC implementation for the communication
+ * The posts service client acts as a facade of the gRPC implementation for the communication
  * between the android client and the server. It receives as a constructor parameter the
  * address where the API is listening.
  *
@@ -15,9 +15,9 @@ import java.lang.IllegalStateException
  * connects. The default value for this field is 'api.miwtter.miw.wcr.es'. This endpoint should
  * be available at least until July 15, 2021.
  */
-class UsersServiceClient(apiServerAddress: String = "http://api.miwtter.miw.wcr.es") {
+class PostServiceClient(apiServerAddress: String = "http://api.miwtter.miw.wcr.es") {
 
-    private val usersServiceStub: UsersServiceGrpc.UsersServiceBlockingStub
+    private val postsServiceStub: PostsServiceGrpc.PostsServiceBlockingStub
 
     init {
         // Create the communication channel.
@@ -26,7 +26,7 @@ class UsersServiceClient(apiServerAddress: String = "http://api.miwtter.miw.wcr.
             .build()
 
         // Create the stub.
-        usersServiceStub = UsersServiceGrpc.newBlockingStub(channel)
+        postsServiceStub = PostsServiceGrpc.newBlockingStub(channel)
 
         // Check the connection
         val connectionState = channel.getState(true)
@@ -34,29 +34,29 @@ class UsersServiceClient(apiServerAddress: String = "http://api.miwtter.miw.wcr.
     }
 
     /**
-     * Routes the register request to the corresponding register method of the stub.
+     * Routes the create request to the corresponding register method of the stub.
      *
      * @param request to be routed through the stub.
      * @return the response that the gRPC server generated.
      */
-    fun register(request: Miwtter.RegisterUserRequest): Miwtter.RegisterUserResponse =
-        usersServiceStub.register(request)
+    fun create(request: Miwtter.CreatePostRequest): Miwtter.CreatePostResponse =
+        postsServiceStub.create(request)
 
     /**
-     * Routes the login request to the corresponding register method of the stub.
+     * Routes the add like request to the corresponding register method of the stub.
      *
      * @param request to be routed through the stub.
      * @return the response that the gRPC server generated.
      */
-    fun login(request: Miwtter.LoginUserRequest): Miwtter.LoginUserResponse =
-        usersServiceStub.login(request)
+    fun addLike(request: Miwtter.LikePostRequest): Miwtter.LikePostResponse =
+        postsServiceStub.like(request)
 
     /**
-     * Routes the find request to the corresponding register method of the stub.
+     * Routes the remove like request to the corresponding register method of the stub.
      *
      * @param request to be routed through the stub.
      * @return the response that the gRPC server generated.
      */
-    fun find(request: Miwtter.FindUserRequest): Miwtter.FindUserResponse =
-        usersServiceStub.find(request)
+    fun removeLike(request: Miwtter.RemoveLikeRequest): Miwtter.RemoveLikeResponse =
+        postsServiceStub.removeLike(request)
 }
