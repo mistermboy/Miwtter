@@ -1,7 +1,7 @@
 package es.uniovi.miw.miwtter.clients
 
 import es.uniovi.miw.miwtter.Miwtter
-import junit.framework.Assert.fail
+import org.junit.Assert.fail
 import org.junit.Ignore
 import org.junit.Test
 import java.lang.Exception
@@ -21,9 +21,9 @@ internal class FeedServiceClientIntegrationTest {
     }
 
     @Test @Ignore
-    fun getfeedTest() {
+    fun getFeedTest() {
         this.service = FeedServiceClient()
         val feed = this.service.getFeed(Miwtter.GetFeedRequest.newBuilder().setActorUsername("").build())
-        System.out.println(feed)
+        println(feed)
     }
 }
