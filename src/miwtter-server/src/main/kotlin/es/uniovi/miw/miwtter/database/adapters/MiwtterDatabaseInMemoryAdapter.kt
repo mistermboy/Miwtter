@@ -7,33 +7,85 @@ import es.uniovi.miw.miwtter.database.domain.User
 import mu.KotlinLogging
 import java.util.*
 
+/**
+ * This implementation of the Miwtter database persists the data in memory. Is very much like
+ * a redis database. But customize for the Mwitter use case. It uses two in-memory data structures
+ * to store the users and the posts.
+ *
+ * @version v1.0
+ * @since v1.0
+ */
 object MiwtterDatabaseInMemoryAdapter : MiwtterDatabase {
 
     private val logger = KotlinLogging.logger(this.javaClass.canonicalName)
 
+    // Initialized in the constructor and declared as variables to allow re-assignment.
     private var users: List<User>
     private var posts: List<Post>
 
+    /**
+     * This object stores the users and the posts in memory by means of two lists.
+     *
+     * @constructor Creates a MiwtterDatabaseInMemoryAdapter with empty collections for the users and the posts.
+     */
     init {
         logger.info("Local database created.")
         users = Collections.emptyList()
         posts = Collections.emptyList()
     }
 
+    /**
+     * Removes all the users and posts from the database by assigning a new empty list to each data structure.
+     */
     internal fun clean() {
+        logger.warn("Cleaning the users list.")
         users = Collections.emptyList()
+
+        logger.warn("Cleaning the posts list.")
         posts = Collections.emptyList()
     }
 
-    private fun findUser(username: String): User? =
-        this.users.find {
+    /**
+     * Iterates over each element of the users collection and finds the one that has the given username.
+     * If none of the users has the given username then it returns null.
+     *
+     * @param username is the username to look for in the collection of users.
+     * @return the user that match the given username. Null if no user matched the given username.
+     */
+    private fun findUser(username: String): User? {
+        logger.info { "Looking for user [$username]." }
+        val foundUser = this.users.find {
             user -> user.username.contentEquals(username)
         }
-
-    private fun findPost(postId: String): Post? =
-        this.posts.find {
-            post -> post.id.contentEquals(postId)
+        if(foundUser == null) {
+            logger.info { "User [$username] not found" }
+        } else {
+            logger.info { "User [$username] found" }
         }
+
+        return foundUser
+    }
+
+    /**
+     * Iterates over each element of the posts collection and finds the one that has the given postId.
+     * If none of the posts has the given postId then it returns null.
+     *
+     * @param postId is the username to look for in the collection of users.
+     * @return the post that match the given postId. Null if no post matched the given postId.
+     */
+    private fun findPost(postId: String): Post? {
+        logger.info { "Looking for post [$postId]" }
+        val foundPost = this.posts.find {
+                post -> post.id.contentEquals(postId)
+        }
+        if(foundPost == null) {
+            logger.info { "User [$postId] not found" }
+        } else {
+            logger.info { "User [$postId] found" }
+        }
+
+        return foundPost
+    }
 
     override fun registerUser(request: Miwtter.RegisterUserRequest): Miwtter.RegisterUserResponse {
         if(this.findUser(request.username) != null) {
