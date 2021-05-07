@@ -50,6 +50,9 @@ class FeedFragment : Fragment() {
 
 
         val service = FeedServiceClient()
+        val s = PostServiceClient()
+        val r = Miwtter.CreatePostRequest.newBuilder().setActorUsername("labra").setContent("y dame más alcooooholl mas medicina").build()
+        s.create(r)
         val request = Miwtter.GetFeedRequest.newBuilder().
                 setActorUsername("labra")
                 .build()

@@ -23,7 +23,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/feedList"
         app:layout_constraintVertical_bias="0.891"
-        android:textAlignment="center"
+        app:elevation="1dp"
+        app:borderWidth="0dp"
+        app:pressedTranslationZ="1dp"
         app:srcCompat="@drawable/outline_add_black_24dp" />
 
 

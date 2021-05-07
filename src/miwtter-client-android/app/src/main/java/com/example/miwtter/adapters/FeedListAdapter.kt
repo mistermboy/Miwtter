@@ -24,7 +24,7 @@ class FeedListAdapter(val items: List<Miwtter.FeedPost>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.cardView.findViewById<TextView>(R.id.name_txt).text = items[position].ownerUsername+"@"+items[position].ownerName
+        holder.cardView.findViewById<TextView>(R.id.name_txt).text = items[position].ownerName+" @"+items[position].ownerUsername
         holder.cardView.findViewById<TextView>(R.id.post_text).text = items[position].content
     }
 
