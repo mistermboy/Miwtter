@@ -11,6 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.danimeana.weatherapp.FeedListAdapter
 import com.danimeana.weatherapp.Tweet
 import com.example.miwtter.R
+import es.uniovi.miw.miwtter.Miwtter
+import es.uniovi.miw.miwtter.clients.FeedServiceClient
+import es.uniovi.miw.miwtter.clients.PostServiceClient
+import es.uniovi.miw.miwtter.clients.UsersServiceClient
 
 class FeedFragment : Fragment() {
 
@@ -43,7 +47,15 @@ class FeedFragment : Fragment() {
         val view = inflater.inflate(R.layout.feed_fragment, container, false)
         val feedList: RecyclerView = view.findViewById(R.id.feedList)
         feedList.layoutManager = LinearLayoutManager(activity)
-        feedList.adapter = FeedListAdapter(items)
+
+
+        val service = FeedServiceClient()
+        val request = Miwtter.GetFeedRequest.newBuilder().
+                setActorUsername("labra")
+                .build()
+
+        val response = service.getFeed(request)
+        feedList.adapter = FeedListAdapter(response.postsList)
         return view
     }
 }

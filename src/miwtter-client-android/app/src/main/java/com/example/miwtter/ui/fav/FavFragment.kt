@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.danimeana.weatherapp.FeedListAdapter
 import com.danimeana.weatherapp.Tweet
 import com.example.miwtter.R
+import es.uniovi.miw.miwtter.Miwtter
+import es.uniovi.miw.miwtter.clients.FeedServiceClient
 
 class FavFragment : Fragment() {
 
@@ -34,7 +36,15 @@ class FavFragment : Fragment() {
         val view = inflater.inflate(R.layout.fav_fragment, container, false)
         val favList: RecyclerView = view.findViewById(R.id.favList)
         favList.layoutManager = LinearLayoutManager(activity)
-        favList.adapter = FeedListAdapter(items)
+        val service = FeedServiceClient()
+        val request = Miwtter.GetFeedRequest.newBuilder().
+        setActorUsername("labra")
+                .build()
+
+
+        val response = service.getFeed(request)
+
+        favList.adapter = FeedListAdapter(response.postsList)
         return view
     }
 }
