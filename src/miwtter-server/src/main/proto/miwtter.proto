@@ -162,6 +162,7 @@ message GetFeedResponse {
 message FeedPost {
     string postId = 1;
     string ownerUsername = 2;
-    string content = 3;
-    int32 numberOfLikes = 4;
+    string ownerName = 3;
+    string content = 4;
+    int32 numberOfLikes = 5;
 }

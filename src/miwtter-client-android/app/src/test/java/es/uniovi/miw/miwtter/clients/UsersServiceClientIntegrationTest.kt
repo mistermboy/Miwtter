@@ -36,4 +36,14 @@ class UsersServiceClientIntegrationTest {
         val response = this.service.register(request = request)
         println(response.responseStatus)
     }
+
+    @Test
+    fun loginUserTest() {
+        var request = Miwtter.LoginUserRequest.newBuilder()
+            .setUsername("test-user-username")
+            .setPassword("test-user-password")
+            .build()
+        val response = this.service.login(request)
+        println(response.responseStatus)
+    }
 }

@@ -119,7 +119,8 @@ object MiwtterDatabaseInMemoryAdapter : MiwtterDatabase {
                 .setResponseStatus(Miwtter.CreatePostResponse.ResponseStatus.USER_NOT_FOUND)
                 .build()
         } else {
-            this.posts += Post(id = this.posts.size.toString(), ownerUsername = request.actorUsername, content = request.content)
+            val owner = this.findUser(request.actorUsername)!!
+            this.posts += Post(id = this.posts.size.toString(), ownerUsername = request.actorUsername, ownerName = owner.name,content = request.content)
             Miwtter.CreatePostResponse.newBuilder()
                 .setResponseStatus(Miwtter.CreatePostResponse.ResponseStatus.POST_CREATED)
                 .build()
@@ -184,6 +185,7 @@ object MiwtterDatabaseInMemoryAdapter : MiwtterDatabase {
                 Miwtter.FeedPost.newBuilder()
                     .setPostId(post.id)
                     .setOwnerUsername(post.ownerUsername)
+                    .setOwnerName(post.ownerName)
                     .setContent(post.content)
                     .setNumberOfLikes(post.numberOfLikes)
                     .build()
