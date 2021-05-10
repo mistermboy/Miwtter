@@ -12,7 +12,7 @@ internal class FeedServiceClientIntegrationTest {
     @Test
     fun connectionTest() {
         try {
-            service = FeedServiceClient()
+            service = FeedServiceClient
         } catch (e: Exception) {
             e.printStackTrace()
             fail("Connection with the feed service could not be stabilised")
@@ -21,7 +21,7 @@ internal class FeedServiceClientIntegrationTest {
 
     @Test @Ignore
     fun getFeedTest() {
-        this.service = FeedServiceClient()
+        this.service = FeedServiceClient
         val feed = this.service.getFeed(Miwtter.GetFeedRequest.newBuilder().setActorUsername("").build())
         println(feed)
     }

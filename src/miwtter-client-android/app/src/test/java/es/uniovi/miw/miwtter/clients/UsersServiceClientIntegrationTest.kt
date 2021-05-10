@@ -11,13 +11,13 @@ class UsersServiceClientIntegrationTest {
 
     @Before
     fun setUp() {
-        this.service = UsersServiceClient()
+        this.service = UsersServiceClient
     }
 
     @Test
     fun connectionTest() {
         try {
-            service = UsersServiceClient()
+            service = UsersServiceClient
         } catch (e: Exception) {
             e.printStackTrace()
             fail("Connection with the users service could not be stabilised")

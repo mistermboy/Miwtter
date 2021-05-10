@@ -10,7 +10,7 @@ class PostsServiceClientIntegrationTest {
     @Test
     fun connectionTest() {
         try {
-            service = PostServiceClient()
+            service = PostServiceClient
         } catch (e: Exception) {
             e.printStackTrace()
             fail("Connection with the posts service could not be stabilised")
