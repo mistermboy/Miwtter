@@ -1,9 +1,7 @@
-package es.uniovi.miw.miwtter.database.adapters
+package es.uniovi.miw.miwtter.database.inmemory
 
 import es.uniovi.miw.miwtter.Miwtter
 import es.uniovi.miw.miwtter.database.MiwtterDatabase
-import es.uniovi.miw.miwtter.database.domain.Post
-import es.uniovi.miw.miwtter.database.domain.User
 import mu.KotlinLogging
 import java.util.*
 
@@ -15,13 +13,13 @@ import java.util.*
  * @version v1.0
  * @since v1.0
  */
-object MiwtterDatabaseInMemoryAdapter : MiwtterDatabase {
+object InMemoryMiwtterDatabase : MiwtterDatabase {
 
     private val logger = KotlinLogging.logger(this.javaClass.canonicalName)
 
     // Initialized in the constructor and declared as variables to allow re-assignment.
-    private var users: List<User>
-    private var posts: List<Post>
+    private var users: List<InMemoryDatabaseUserDataClass>
+    private var posts: List<InMemoryDatabasePostDataClass>
 
     /**
      * This object stores the users and the posts in memory by means of two lists.
@@ -52,9 +50,9 @@ object MiwtterDatabaseInMemoryAdapter : MiwtterDatabase {
      * @param username is the username to look for in the collection of users.
      * @return the user that match the given username. Null if no user matched the given username.
      */
-    private fun findUser(username: String): User? {
+    private fun findUser(username: String): InMemoryDatabaseUserDataClass? {
         logger.info { "Looking for user [$username]." }
-        val foundUser = this.users.find {
+        val foundUser = users.find {
             user -> user.username.contentEquals(username)
         }
         if(foundUser == null) {
@@ -73,9 +71,9 @@ object MiwtterDatabaseInMemoryAdapter : MiwtterDatabase {
      * @param postId is the username to look for in the collection of users.
      * @return the post that match the given postId. Null if no post matched the given postId.
      */
-    private fun findPost(postId: String): Post? {
+    private fun findPost(postId: String): InMemoryDatabasePostDataClass? {
         logger.info { "Looking for post [$postId]" }
-        val foundPost = this.posts.find {
+        val foundPost = posts.find {
                 post -> post.id.contentEquals(postId)
         }
         if(foundPost == null) {
@@ -88,7 +86,7 @@ object MiwtterDatabaseInMemoryAdapter : MiwtterDatabase {
     }
 
     override fun registerUser(request: Miwtter.RegisterUserRequest): Miwtter.RegisterUserResponse {
-        if(this.findUser(request.username) != null) {
+        if(findUser(request.username) != null) {
             logger.info { "The user [${request.username}] cannot be registered. It already exists in the database." }
             return Miwtter.RegisterUserResponse.newBuilder()
                 .setResponseStatus(Miwtter.RegisterUserResponse.ResponseStatus.USERNAME_ALREADY_EXISTS)
@@ -96,14 +94,14 @@ object MiwtterDatabaseInMemoryAdapter : MiwtterDatabase {
         }
 
         logger.info { "Registering in the database the user [$request.username]." }
-        this.users += User(name = request.name, surname = request.surname, password = request.password, username = request.username)
+        users += InMemoryDatabaseUserDataClass(name = request.name, surname = request.surname, password = request.password, username = request.username)
         return Miwtter.RegisterUserResponse.newBuilder()
             .setResponseStatus(Miwtter.RegisterUserResponse.ResponseStatus.USER_CREATED)
             .build()
     }
 
     override fun loginUser(request: Miwtter.LoginUserRequest): Miwtter.LoginUserResponse {
-        val userInDatabase = this.findUser(request.username)
+        val userInDatabase = findUser(request.username)
         if(userInDatabase == null) {
             logger.info { "User [${request.username}] not found in the database." }
             return Miwtter.LoginUserResponse.newBuilder()
@@ -123,10 +121,10 @@ object MiwtterDatabaseInMemoryAdapter : MiwtterDatabase {
     }
 
     override fun findUserByFreeText(request: Miwtter.FindUserRequest): Miwtter.FindUserResponse {
-        val dbUser = this.findUser(request.username)
+        val dbUser = findUser(request.username)
 
         return if(dbUser != null) {
-            val userFeedPosts = this.posts.filter {
+            val userFeedPosts = posts.filter {
                 post -> post.ownerUsername.contentEquals(dbUser.username)
             }.map {
                 post -> Miwtter.UserPost.newBuilder()
@@ -166,13 +164,13 @@ object MiwtterDatabaseInMemoryAdapter : MiwtterDatabase {
     }
 
     override fun createPost(request: Miwtter.CreatePostRequest): Miwtter.CreatePostResponse {
-        return if(this.findUser(request.actorUsername) == null) {
+        return if(findUser(request.actorUsername) == null) {
             Miwtter.CreatePostResponse.newBuilder()
                 .setResponseStatus(Miwtter.CreatePostResponse.ResponseStatus.USER_NOT_FOUND)
                 .build()
         } else {
-            val owner = this.findUser(request.actorUsername)!!
-            this.posts += Post(id = this.posts.size.toString(), ownerUsername = request.actorUsername, ownerName = owner.name,content = request.content)
+            val owner = findUser(request.actorUsername)!!
+            posts += InMemoryDatabasePostDataClass(id = posts.size.toString(), ownerUsername = request.actorUsername, ownerName = owner.name,content = request.content)
             Miwtter.CreatePostResponse.newBuilder()
                 .setResponseStatus(Miwtter.CreatePostResponse.ResponseStatus.POST_CREATED)
                 .build()
@@ -180,8 +178,8 @@ object MiwtterDatabaseInMemoryAdapter : MiwtterDatabase {
     }
 
     override fun addLikeToPost(request: Miwtter.LikePostRequest): Miwtter.LikePostResponse {
-        val dbPost = this.findPost(request.postId)
-        val dbUser = this.findUser(request.actorUsername)
+        val dbPost = findPost(request.postId)
+        val dbUser = findUser(request.actorUsername)
 
         return if(dbPost == null) {
             Miwtter.LikePostResponse.newBuilder()
@@ -206,8 +204,8 @@ object MiwtterDatabaseInMemoryAdapter : MiwtterDatabase {
     }
 
     override fun removeLike(request: Miwtter.RemoveLikeRequest): Miwtter.RemoveLikeResponse {
-        val dbPost = this.findPost(request.postId)
-        val dbUser = this.findUser(request.actorUsername)
+        val dbPost = findPost(request.postId)
+        val dbUser = findUser(request.actorUsername)
 
         return if(dbPost == null) {
             Miwtter.RemoveLikeResponse.newBuilder()
@@ -232,7 +230,7 @@ object MiwtterDatabaseInMemoryAdapter : MiwtterDatabase {
 
     override fun getFeedForUser(request: Miwtter.GetFeedRequest): Miwtter.GetFeedResponse {
         var feedPosts = ArrayList<Miwtter.FeedPost>()
-        this.posts.forEach {
+        posts.forEach {
             post -> feedPosts.add(
                 Miwtter.FeedPost.newBuilder()
                     .setPostId(post.id)
@@ -249,5 +247,4 @@ object MiwtterDatabaseInMemoryAdapter : MiwtterDatabase {
             .addAllPosts(feedPosts)
             .build()
     }
-
 }
