@@ -12,7 +12,7 @@
         android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
+        android:id="@+id/create_post_btn"
         android:layout_width="74dp"
         android:layout_height="61dp"
         android:clickable="true"

@@ -8,12 +8,16 @@ import com.danimeana.weatherapp.Tweet
 import com.example.miwtter.databinding.ActivityHomeBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.miwtter.ui.feed.CreatePostFragment
+import com.example.miwtter.ui.feed.FeedFragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(){
 
     private lateinit var binding: ActivityHomeBinding
 
@@ -22,6 +26,12 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initialize()
+/*
+        supportFragmentManager
+                .beginTransaction()
+                .add(binding.navHostFragment.id, FirstFragment())
+                .commit()*/
+
     }
 
     private fun initialize() {
@@ -31,8 +41,14 @@ class HomeActivity : AppCompatActivity() {
             R.id.navigation_feed, R.id.navigation_fav, R.id.navigation_profile))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val createPostBtn: FloatingActionButton = findViewById( R.id.create_post_btn)
+        createPostBtn.setOnClickListener {
+            //navController.navigate()
+        }
+
+
+
     }
-
-
 
 }

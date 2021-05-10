@@ -6,11 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.danimeana.weatherapp.FeedListAdapter
 import com.danimeana.weatherapp.Tweet
 import com.example.miwtter.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import es.uniovi.miw.miwtter.Miwtter
 import es.uniovi.miw.miwtter.clients.FeedServiceClient
 import es.uniovi.miw.miwtter.clients.PostServiceClient
@@ -59,6 +63,12 @@ class FeedFragment : Fragment() {
 
         val response = service.getFeed(request)
         feedList.adapter = FeedListAdapter(response.postsList)
+
+
+        view.findViewById<FloatingActionButton>(R.id.create_post_btn).setOnClickListener{
+           // val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        }
+
         return view
     }
 }
