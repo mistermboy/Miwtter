@@ -48,8 +48,6 @@ class HomeActivity : AppCompatActivity(){
             //navController.navigate()
         }
 */
-
-
     }
 
 }

@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.danimeana.weatherapp.FeedListAdapter
@@ -20,11 +21,6 @@ import es.uniovi.miw.miwtter.persistence.LocalDatabaseRoomImpl
 
 class FavFragment : Fragment() {
 
-    private val items = listOf(
-        Tweet("Lunes, 03 de mayo del 20201", "Lluvioso", 4f, 13f),
-        Tweet("Martes, 04 de mayo del 20201", "Cubierto", 5f, 15f),
-        Tweet("Miércoles, 05 de mayo del 20201", "Cubierto", 7f, 17f),
-    )
 
     private lateinit var favViewModel: FavViewModel
 
@@ -38,23 +34,15 @@ class FavFragment : Fragment() {
         val view = inflater.inflate(R.layout.fav_fragment, container, false)
         val favList: RecyclerView = view.findViewById(R.id.favList)
         favList.layoutManager = LinearLayoutManager(activity)
-        val service = FeedServiceClient()
-        val request = Miwtter.GetFeedRequest.newBuilder().
-        setActorUsername("labra")
-                .build()
 
 
-        val response = service.getFeed(request)
-
-
-
-        favViewModel.requestCreatePost(Miwtter.FeedPost.newBuilder().setContent("Esdto es un fav post").setPostId("asdasd").build())
+        favViewModel.requestCreatePost(Miwtter.FeedPost.newBuilder().setContent("Esdto es un fav post").setPostId("222").build())
         favViewModel.requestFavPosts()
-        val all = favViewModel.postsList
-        println(all.toString())
+        val all = favViewModel.postsList.value
 
-
-        favList.adapter = FeedListAdapter(response.postsList)
+        favViewModel.postsList.observe(viewLifecycleOwner) { postsList: List<Miwtter.FeedPost> ->
+            favList.adapter = FeedListAdapter(postsList)
+        }
         return view
     }
 
