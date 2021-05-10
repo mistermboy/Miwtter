@@ -2,11 +2,13 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:minHeight="100dp"
     card_view:cardElevation="2dp"
     android:layout_marginBottom="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:minHeight="100dp"
         android:layout_height="match_parent">
 
         <TextView
@@ -15,8 +17,9 @@
             android:layout_height="25dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginTop="10dp"
             android:textSize="17dp"
-            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintBottom_toTopOf="@+id/post_text"
             card_view:layout_constraintStart_toEndOf="@+id/imageView2"
             card_view:layout_constraintTop_toTopOf="parent"
             card_view:layout_constraintVertical_bias="0.038" />
@@ -39,12 +42,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:textSize="13dp"
+            android:textSize="16dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintStart_toEndOf="@+id/imageView2"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintVertical_bias="0.559" />
 
         <com.like.LikeButton
             android:id="@+id/like_button"
@@ -90,7 +94,6 @@
             android:id="@+id/num_likes"
             android:layout_width="27dp"
             android:layout_height="16dp"
-            android:text="100"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.203"

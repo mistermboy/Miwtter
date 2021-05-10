@@ -3,6 +3,8 @@ package com.example.miwtter
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.miwtter.databinding.ActivitySignupBinding
@@ -19,9 +21,14 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val  progressBar =  findViewById<ProgressBar>(R.id.progress_bar);
+        progressBar.setMax(10);
+
         binding.loginTxt.setOnClickListener{ startActivity(Intent(this,LoginActivity::class.java)) }
         binding.siginBtn.setOnClickListener{
 
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setProgress(0);
 
             if (isValid()) {
                 val service = UsersServiceClient
@@ -40,10 +47,12 @@ class SignUpActivity : AppCompatActivity() {
                 when (response.responseStatus) {
                     Miwtter.RegisterUserResponse.ResponseStatus.USER_CREATED -> {
                         Log.i("USER_CREATED", "Name: " + name + " Surname: " + surname + " Username: " + username + " Password: " + password)
+                        progressBar.setVisibility(View.GONE);
                         startActivity(Intent(this, LoginActivity::class.java))
                         Toast.makeText(this,getString(com.example.miwtter.R.string.success_register), Toast.LENGTH_SHORT).show()
                     }
                     Miwtter.RegisterUserResponse.ResponseStatus.USERNAME_ALREADY_EXISTS ->{
+                        progressBar.setVisibility(View.GONE);
                         binding.username.error = getString(com.example.miwtter.R.string.username_exists)
                         binding.username.requestFocus()
                     }

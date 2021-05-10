@@ -3,6 +3,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/twitterBlue</item>
         <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/black</item>
         <item name="colorPrimaryVariant">@color/twitterBlue</item>
         <item name="colorOnPrimary">@color/twitterBlue</item>
         <!-- Secondary brand color. -->

@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -12,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.danimeana.weatherapp.BookMarkListAdapter
 import com.example.miwtter.R
 import es.uniovi.miw.miwtter.Miwtter
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 
 class FavFragment : Fragment() {
 
@@ -34,6 +38,16 @@ class FavFragment : Fragment() {
         favViewModel.postsList.observe(viewLifecycleOwner) { postsList: List<Miwtter.FeedPost> ->
             favList.adapter = BookMarkListAdapter(postsList)
         }
+
+        GlobalScope.async {
+            val favs = PostsList.requestFavPosts()
+            if(!favs.isEmpty()){
+                view.findViewById<TextView>(R.id.nothing_txt).isVisible=false
+            }else{
+                view.findViewById<TextView>(R.id.nothing_txt).isVisible=true
+            }
+        }
+
         return view
     }
 

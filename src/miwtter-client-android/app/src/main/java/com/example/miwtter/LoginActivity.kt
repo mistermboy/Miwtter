@@ -2,6 +2,8 @@ package com.example.miwtter
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.miwtter.databinding.ActivityLoginBinding
@@ -17,6 +19,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val  progressBar =  findViewById<ProgressBar>(R.id.progress_bar);
+        progressBar.setMax(10);
+
         binding.loginBtn.setOnClickListener{
             if (isValid()) {
                 val service = UsersServiceClient
@@ -27,6 +33,9 @@ class LoginActivity : AppCompatActivity() {
                         .setPassword(password)
                         .build()
                 try {
+                    progressBar.setVisibility(View.VISIBLE);
+                    progressBar.setProgress(0);
+
                     val response = service.login(request)
 
                     when (response.responseStatus) {
@@ -42,11 +51,14 @@ class LoginActivity : AppCompatActivity() {
                             Settings(this).name = user.userList.get(0).name
                             Settings(this).surname = user.userList.get(0).surname
 
+
+                            progressBar.setVisibility(View.GONE);
                             startActivity(Intent(this, HomeActivity::class.java))
                             Toast.makeText(this, getString(R.string.welcome), Toast.LENGTH_SHORT).show()
                         }
 
                         Miwtter.LoginUserResponse.ResponseStatus.INCORRECT_USERNAME_OR_PASSWORD -> {
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(
                                 this,
                                 getString(R.string.error_login),
@@ -55,6 +67,7 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
                 }catch (e:Exception){
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(this, getString(R.string.error_server), Toast.LENGTH_SHORT).show()
                 }
 
