@@ -10,8 +10,18 @@
         android:name="com.example.miwtter.ui.feed.FeedFragment"
         android:label="@string/title_home"
         tools:layout="@layout/feed_fragment">
+
     </fragment>
 
+    <fragment
+        android:id="@+id/navigation_create_post"
+        android:name="com.example.miwtter.ui.feed.CreatePostFragment"
+        android:label="@string/title_post"
+        tools:layout="@layout/create_post_fragment" >
+        <action
+        android:id="@+id/action_create_to_feed"
+        app:destination="@id/navigation_feed" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_fav"
         android:name="com.example.miwtter.ui.fav.FavFragment"

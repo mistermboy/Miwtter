@@ -7,6 +7,11 @@
         android:title="@string/title_home" />
 
     <item
+        android:id="@+id/navigation_create_post"
+        android:icon="@drawable/outline_add_black_24dp"
+        android:title="@string/title_create" />
+
+    <item
         android:id="@+id/navigation_fav"
         android:icon="@drawable/outline_favorite_border_black_24dp"
         android:title="@string/title_fav" />

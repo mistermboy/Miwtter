@@ -15,9 +15,10 @@ import java.lang.IllegalStateException
  * connects. The default value for this field is 'api.miwtter.miw.wcr.es'. This endpoint should
  * be available at least until July 15, 2021.
  */
-class PostServiceClient(apiServerAddress: String = "api.miwtter.miw.wcr.es:5000") {
+object PostServiceClient {
 
     private val postsServiceStub: PostsServiceGrpc.PostsServiceBlockingStub
+    private val apiServerAddress: String = "api.miwtter.miw.wcr.es:5000"
 
     init {
         // Create the communication channel.

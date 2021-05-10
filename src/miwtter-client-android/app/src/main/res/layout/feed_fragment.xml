@@ -11,22 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/create_post_btn"
-        android:layout_width="74dp"
-        android:layout_height="61dp"
-        android:clickable="true"
-        app:backgroundTint="@color/twitterBlue"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.851"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/feedList"
-        app:layout_constraintVertical_bias="0.891"
-        app:elevation="1dp"
-        app:borderWidth="0dp"
-        app:pressedTranslationZ="1dp"
-        app:srcCompat="@drawable/outline_add_white_24dp"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

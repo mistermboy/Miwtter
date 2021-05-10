@@ -29,7 +29,7 @@ class SignUpActivity : AppCompatActivity() {
 
 
             if (isValid()) {
-                val service = UsersServiceClient()
+                val service = UsersServiceClient
                 val name = binding.name.editText?.text.toString()
                 val surname = binding.surname.editText?.text.toString()
                 val username = binding.username.editText?.text.toString()

@@ -19,7 +19,8 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.loginBtn.setOnClickListener{
-
+            startActivity(Intent(this, HomeActivity::class.java))
+            /*
             if (isValid()) {
                 val service = UsersServiceClient()
                 val username = binding.username.editText?.text.toString()
@@ -38,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this, "Username or password are incorrect", Toast.LENGTH_SHORT).show()
                     }
                 }
-            }
+            }*/
         }
         binding.signUpTxt.setOnClickListener{ startActivity(Intent(this,SignUpActivity::class.java)) }
     }

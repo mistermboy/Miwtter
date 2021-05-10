@@ -38,26 +38,16 @@ class FeedFragment : Fragment() {
         feedList.layoutManager = LinearLayoutManager(activity)
 
 
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
-
-        val service = FeedServiceClient()
-        val s = PostServiceClient()
-        val r = Miwtter.CreatePostRequest.newBuilder().setActorUsername("labra").setContent("y dame más alcooooholl mas medicina").build()
-        s.create(r)
+        val feedService = FeedServiceClient
+        val postService = PostServiceClient
+        val postResponse = Miwtter.CreatePostRequest.newBuilder().setActorUsername("labra").setContent("y dame más alcooooholl mas medicina").build()
+        postService.create(postResponse)
         val request = Miwtter.GetFeedRequest.newBuilder().
                 setActorUsername("labra")
                 .build()
 
-        val response = service.getFeed(request)
+        val response = feedService.getFeed(request)
         feedList.adapter = FeedListAdapter(response.postsList)
-
-
-        view.findViewById<FloatingActionButton>(R.id.create_post_btn).setOnClickListener{
-           val transaction = getFragmentManager()?.beginTransaction()
-            transaction?.replace(R.id.nav_host_fragment,CreatePostFragment())
-            transaction?.commit()
-        }
-
         return view
     }
 }

@@ -19,4 +19,6 @@
     <string name="title_home">Home</string>
     <string name="title_fav">Favorites</string>
     <string name="title_profile">Profile</string>
+    <string name="title_create">Post</string>
+    <string name="title_post">Post</string>
 </resources>

@@ -32,19 +32,7 @@ class HomeActivity : AppCompatActivity(){
             R.id.navigation_feed, R.id.navigation_fav, R.id.navigation_profile))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-    }
 
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                val transaction = supportFragmentManager.beginTransaction()
-                transaction.replace(R.id.nav_host_fragment, FeedFragment())
-                transaction.commit()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
 }

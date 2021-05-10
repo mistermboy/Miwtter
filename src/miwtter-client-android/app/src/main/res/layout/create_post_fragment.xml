@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -22,9 +22,9 @@
         android:id="@+id/post_content_txt"
         android:layout_width="244dp"
         android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
         android:background="@android:color/transparent"
         android:ems="10"
-        android:layout_marginTop="30dp"
         android:gravity="start|top"
         android:hint="¿Qué está pasando?"
         android:inputType="textMultiLine"
@@ -39,4 +39,24 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.129" />
 
-</LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/create_post_btn"
+        android:layout_width="74dp"
+        android:layout_height="61dp"
+        android:layout_marginBottom="96dp"
+        android:clickable="true"
+        app:backgroundTint="@color/twitterBlue"
+        app:borderWidth="0dp"
+        app:elevation="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.887"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/feedList"
+        app:srcCompat="@drawable/outline_post_add_white_24dp"
+        app:layout_constraintVertical_bias="0.891"
+        app:pressedTranslationZ="1dp"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,10 +5,15 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.miwtter.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import es.uniovi.miw.miwtter.Miwtter
+import es.uniovi.miw.miwtter.clients.PostServiceClient
 
 
 class CreatePostFragment : Fragment() {
@@ -23,16 +28,24 @@ class CreatePostFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.create_post_fragment, container, false)
 
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        val callback: OnBackPressedCallback =
-            object : OnBackPressedCallback(true /* enabled by default */) {
-                override fun handleOnBackPressed() {
-                    val transaction = getFragmentManager()?.beginTransaction()
-                    transaction?.replace(R.id.nav_host_fragment,FeedFragment())
-                    transaction?.commit()
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
+        val postBtn = view.findViewById<FloatingActionButton>(R.id.create_post_btn)
+        postBtn.setOnClickListener {
+            val service = PostServiceClient
+            val content = view.findViewById<TextView>(R.id.post_content_txt).text
+            val request = Miwtter.CreatePostRequest.newBuilder()
+                .setActorUsername("labra")
+                .setContent(content.toString())
+                .build()
+
+            val response = service.create(request)
+            when (response.responseStatus) {
+                Miwtter.CreatePostResponse.ResponseStatus.POST_CREATED -> {
+                    Toast.makeText(context, "Posteao", Toast.LENGTH_SHORT).show()
                 }
             }
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+        }
 
         return view
     }
