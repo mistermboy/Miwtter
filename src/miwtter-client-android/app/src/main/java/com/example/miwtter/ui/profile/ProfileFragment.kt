@@ -14,15 +14,11 @@ import com.example.miwtter.R
 
 class ProfileFragment : Fragment() {
 
-    private lateinit var feedViewModel: ProfileViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        feedViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
         val view = inflater.inflate(R.layout.profile_fragment, container, false)
         return view
     }

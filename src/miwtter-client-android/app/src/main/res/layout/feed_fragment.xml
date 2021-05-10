@@ -26,7 +26,7 @@
         app:elevation="1dp"
         app:borderWidth="0dp"
         app:pressedTranslationZ="1dp"
-        app:srcCompat="@drawable/outline_add_black_24dp" />
+        app:srcCompat="@drawable/outline_add_white_24dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

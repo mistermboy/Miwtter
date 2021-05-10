@@ -36,10 +36,8 @@ class FavFragment : Fragment() {
         favList.layoutManager = LinearLayoutManager(activity)
 
 
-        favViewModel.requestCreatePost(Miwtter.FeedPost.newBuilder().setContent("Esdto es un fav post").setPostId("222").build())
+        //favViewModel.requestCreatePost(Miwtter.FeedPost.newBuilder().setOwnerName("Paco").setContent("Esdto es un fav post").setPostId("555").build())
         favViewModel.requestFavPosts()
-        val all = favViewModel.postsList.value
-
         favViewModel.postsList.observe(viewLifecycleOwner) { postsList: List<Miwtter.FeedPost> ->
             favList.adapter = FeedListAdapter(postsList)
         }

@@ -26,6 +26,7 @@ class FeedListAdapter(val items: List<Miwtter.FeedPost>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.cardView.findViewById<TextView>(R.id.name_txt).text = items[position].ownerName+" @"+items[position].ownerUsername
         holder.cardView.findViewById<TextView>(R.id.post_text).text = items[position].content
+        holder.cardView.findViewById<TextView>(R.id.num_likes).text = ""+items[position].numberOfLikes
     }
 
     override fun getItemCount() = items.size

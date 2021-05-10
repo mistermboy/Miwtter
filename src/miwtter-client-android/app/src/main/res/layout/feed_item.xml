@@ -87,5 +87,17 @@
             card_view:like_drawable="@drawable/star_like"
             card_view:unlike_drawable="@drawable/star_unlike" />
 
+        <TextView
+            android:id="@+id/num_likes"
+            android:layout_width="27dp"
+            android:layout_height="16dp"
+            android:text="100"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.203"
+            card_view:layout_constraintStart_toEndOf="@+id/heart_button"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintVertical_bias="0.85" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

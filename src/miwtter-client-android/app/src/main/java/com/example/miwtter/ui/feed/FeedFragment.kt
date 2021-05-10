@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation.findNavController
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.danimeana.weatherapp.FeedListAdapter
 import com.danimeana.weatherapp.Tweet
 import com.example.miwtter.R
+import com.example.miwtter.ui.fav.FavFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import es.uniovi.miw.miwtter.Miwtter
 import es.uniovi.miw.miwtter.clients.FeedServiceClient
@@ -36,6 +38,8 @@ class FeedFragment : Fragment() {
         feedList.layoutManager = LinearLayoutManager(activity)
 
 
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
         val service = FeedServiceClient()
         val s = PostServiceClient()
         val r = Miwtter.CreatePostRequest.newBuilder().setActorUsername("labra").setContent("y dame más alcooooholl mas medicina").build()
@@ -49,7 +53,9 @@ class FeedFragment : Fragment() {
 
 
         view.findViewById<FloatingActionButton>(R.id.create_post_btn).setOnClickListener{
-           // val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+           val transaction = getFragmentManager()?.beginTransaction()
+            transaction?.replace(R.id.nav_host_fragment,CreatePostFragment())
+            transaction?.commit()
         }
 
         return view
