@@ -105,8 +105,8 @@ message CreatePostResponse {
 }
 
 message LikePostRequest {
-    string actorUsername = 1;
-    string postId   = 2;
+    string actorUsername    = 1;
+    string postId           = 2;
 }
 
 message LikePostResponse {
@@ -119,8 +119,8 @@ message LikePostResponse {
 }
 
 message RemoveLikeRequest {
-    string actorUsername = 1;
-    string postId   = 2;
+    string actorUsername    = 1;
+    string postId           = 2;
 }
 
 message RemoveLikeResponse {
@@ -152,17 +152,17 @@ message GetFeedRequest {
 
 message GetFeedResponse {
     enum ResponseStatus {
-        FEED_FOUND    = 0;
+        FEED_FOUND      = 0;
         USER_NOT_FOUND  = 1;
     }
     ResponseStatus responseStatus   = 1;
-    repeated FeedPost posts = 2;
+    repeated FeedPost posts         = 2;
 }
 
 message FeedPost {
-    string postId = 1;
-    string ownerUsername = 2;
-    string ownerName = 3;
-    string content = 4;
-    int32 numberOfLikes = 5;
+    string postId           = 1;
+    string ownerUsername    = 2;
+    string ownerName        = 3;
+    string content          = 4;
+    int32 numberOfLikes     = 5;
 }
