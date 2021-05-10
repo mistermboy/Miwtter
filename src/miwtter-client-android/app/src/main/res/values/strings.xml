@@ -18,8 +18,11 @@
     <string name="success_register">Succesfully registered!</string>
     <string name="username_exists">Username already exists</string>
 
+    <string name="sign_miwtter">Sign in to Miwtter</string>
     <string name="log_miwtter">Log in to Miwtter</string>
-    <string name="have_miwtter_account">Don´t you have an account?</string>
+    <string name="dont_have_miwtter_account">Don´t you have an account?</string>
+    <string name="have_miwtter_account">You have an account?</string>
+    <string name="happening">What´s happening?</string>
 
 
     <string name="prompt_name">Name</string>

@@ -26,7 +26,6 @@
                 android:id="@+id/name_surname_txt"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:text="Pablo Iglesias"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="28dp" />
@@ -50,7 +49,7 @@
                         android:id="@+id/name_field_txt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Name"
+                        android:text="@string/prompt_name"
                         android:textColor="@color/twitterBlue"
                         android:textSize="20dp" />
 
@@ -58,7 +57,6 @@
                         android:id="@+id/name_txt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Pablo"
                         android:textSize="20dp" />
 
         </LinearLayout>
@@ -73,7 +71,7 @@
                 android:id="@+id/surname_field_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Surname"
+                android:text="@string/prompt_surname"
                 android:textColor="@color/twitterBlue"
                 android:textSize="20dp" />
 
@@ -81,7 +79,6 @@
                 android:id="@+id/surname_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Iglesias"
                 android:textSize="20dp" />
 
         </LinearLayout>
@@ -96,7 +93,7 @@
                 android:id="@+id/username_field_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Username"
+                android:text="@string/prompt_username"
                 android:textColor="@color/twitterBlue"
                 android:textSize="20dp" />
 
@@ -104,7 +101,6 @@
                 android:id="@+id/username_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="\@pabloIglesias"
                 android:textSize="20dp" />
 
         </LinearLayout>

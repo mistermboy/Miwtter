@@ -24,7 +24,7 @@
         android:background="@android:color/transparent"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="¿Qué está pasando?"
+        android:hint="@string/happening"
         android:inputType="textMultiLine"
         android:overScrollMode="always"
         android:scrollbarStyle="insideInset"
