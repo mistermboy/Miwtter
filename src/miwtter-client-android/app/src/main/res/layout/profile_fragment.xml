@@ -24,7 +24,7 @@
                 android:src="@drawable/avatar"/>
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/name_surname_txt"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:text="Pablo Iglesias"
@@ -48,7 +48,7 @@
             android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView5"
+                        android:id="@+id/name_field_txt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Name"
@@ -56,7 +56,7 @@
                         android:textSize="20dp" />
 
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/name_txt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Pablo"
@@ -71,7 +71,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/surname_field_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Surname"
@@ -79,7 +79,7 @@
                 android:textSize="20dp" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/surname_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Iglesias"
@@ -94,7 +94,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/username_field_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Username"
@@ -102,7 +102,7 @@
                 android:textSize="20dp" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/username_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="\@pabloIglesias"

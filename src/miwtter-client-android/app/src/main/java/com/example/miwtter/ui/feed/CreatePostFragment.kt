@@ -33,15 +33,16 @@ class CreatePostFragment : Fragment() {
         val postBtn = view.findViewById<FloatingActionButton>(R.id.create_post_btn)
         postBtn.setOnClickListener {
             val service = PostServiceClient
-            val content = view.findViewById<TextView>(R.id.post_content_txt).text
+            val content = view.findViewById<TextView>(R.id.post_content_txt)
             val request = Miwtter.CreatePostRequest.newBuilder()
                 .setActorUsername("labra")
-                .setContent(content.toString())
+                .setContent(content.text.toString())
                 .build()
 
             val response = service.create(request)
             when (response.responseStatus) {
                 Miwtter.CreatePostResponse.ResponseStatus.POST_CREATED -> {
+                    content.text = ""
                     Toast.makeText(context, "Posteao", Toast.LENGTH_SHORT).show()
                 }
             }

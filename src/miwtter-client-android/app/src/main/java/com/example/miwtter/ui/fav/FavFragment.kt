@@ -13,7 +13,6 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.danimeana.weatherapp.FeedListAdapter
-import com.danimeana.weatherapp.Tweet
 import com.example.miwtter.R
 import es.uniovi.miw.miwtter.Miwtter
 import es.uniovi.miw.miwtter.clients.FeedServiceClient

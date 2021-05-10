@@ -13,7 +13,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.danimeana.weatherapp.FeedListAdapter
-import com.danimeana.weatherapp.Tweet
 import com.example.miwtter.R
 import com.example.miwtter.ui.fav.FavFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -37,17 +36,13 @@ class FeedFragment : Fragment() {
         val feedList: RecyclerView = view.findViewById(R.id.feedList)
         feedList.layoutManager = LinearLayoutManager(activity)
 
-
         val feedService = FeedServiceClient
-        val postService = PostServiceClient
-        val postResponse = Miwtter.CreatePostRequest.newBuilder().setActorUsername("labra").setContent("y dame más alcooooholl mas medicina").build()
-        postService.create(postResponse)
         val request = Miwtter.GetFeedRequest.newBuilder().
                 setActorUsername("labra")
                 .build()
 
         val response = feedService.getFeed(request)
-        feedList.adapter = FeedListAdapter(response.postsList)
+        feedList.adapter = FeedListAdapter(response.postsList.asReversed())
         return view
     }
 }
