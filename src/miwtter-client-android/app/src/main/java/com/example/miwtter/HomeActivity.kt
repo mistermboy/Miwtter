@@ -42,11 +42,12 @@ class HomeActivity : AppCompatActivity(){
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+/*
         val createPostBtn: FloatingActionButton = findViewById( R.id.create_post_btn)
         createPostBtn.setOnClickListener {
             //navController.navigate()
         }
-
+*/
 
 
     }

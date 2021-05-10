@@ -1,6 +1,7 @@
 package com.example.miwtter.ui.fav
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.danimeana.weatherapp.Tweet
 import com.example.miwtter.R
 import es.uniovi.miw.miwtter.Miwtter
 import es.uniovi.miw.miwtter.clients.FeedServiceClient
+import es.uniovi.miw.miwtter.persistence.LocalDatabaseRoomImpl
 
 class FavFragment : Fragment() {
 
@@ -44,7 +46,16 @@ class FavFragment : Fragment() {
 
         val response = service.getFeed(request)
 
+
+
+        favViewModel.requestCreatePost(Miwtter.FeedPost.newBuilder().setContent("Esdto es un fav post").setPostId("asdasd").build())
+        favViewModel.requestFavPosts()
+        val all = favViewModel.postsList
+        println(all.toString())
+
+
         favList.adapter = FeedListAdapter(response.postsList)
         return view
     }
+
 }

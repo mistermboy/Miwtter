@@ -10,9 +10,6 @@
         android:name="com.example.miwtter.ui.feed.FeedFragment"
         android:label="@string/title_home"
         tools:layout="@layout/feed_fragment">
-        <action
-        android:id="@+id/action_firstFragment_to_secondFragment"
-        app:destination="@id/navigation_profile" />
     </fragment>
 
     <fragment
