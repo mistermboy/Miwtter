@@ -5,7 +5,14 @@ import io.grpc.Server
 import io.grpc.ServerBuilder
 import mu.KotlinLogging
 
-class MiwtterServer(private val port: Int) {
+/**
+ * This class is intended to be the main entrypoint for the server execution. It registers the services/features in the GRPC
+ * server and starts it.
+ *
+ * @param port is an integer that represents the port in which the server will be deployed. The default value for this
+ * parameter is 80. That means that the server will be deployed at port 80.
+ */
+class MiwtterServer(private val port: Int = 80) {
 
     private val logger = KotlinLogging.logger(this.javaClass.canonicalName)
 
@@ -18,6 +25,9 @@ class MiwtterServer(private val port: Int) {
         .addService(UserFeatures())
         .build()
 
+    /**
+     * Starts the server at the indicated port.
+     */
     fun start() {
         server.start()
         logger.info("Server started, listening on $port")
@@ -30,17 +40,27 @@ class MiwtterServer(private val port: Int) {
         )
     }
 
+    /**
+     * Stops the server.
+     */
     private fun stop() {
         server.shutdown()
     }
 
+    /**
+     * Blocks the execution untill the server is shutdown.
+     */
     fun blockUntilShutdown() {
         server.awaitTermination()
     }
 }
 
+/**
+ * Main function. Execute with no args to run the server. It will look for the environment variable 'MIWTTER_PORT'
+ * to load the port where the start the server. If no present will start the server at the 80 port.
+ */
 fun main() {
-    val port = System.getenv("PORT")?.toInt() ?: 80
+    val port = System.getenv("MIWTTER_PORT")?.toInt() ?: 80
     val server = MiwtterServer(port)
     server.start()
     server.blockUntilShutdown()

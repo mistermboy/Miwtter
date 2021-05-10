@@ -1,4 +1,4 @@
-package es.uniovi.miw.miwtter.database.adapters
+package es.uniovi.miw.miwtter.database.inmemory
 
 import es.uniovi.miw.miwtter.Miwtter
 import org.junit.jupiter.api.Assertions
@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test
 
 class MiwtterDatabaseInMemoryAdapterTest {
 
-    private lateinit var database: MiwtterDatabaseInMemoryAdapter
+    private lateinit var database: InMemoryMiwtterDatabase
 
     @BeforeEach
     fun setUp() {
-        this.database = MiwtterDatabaseInMemoryAdapter
+        this.database = InMemoryMiwtterDatabase
         this.database.clean()
 
         val registerFirstUserRequest = Miwtter.RegisterUserRequest.newBuilder()
@@ -40,7 +40,7 @@ class MiwtterDatabaseInMemoryAdapterTest {
 
     @Test
     fun databaseInitializationTest() {
-        this.database = MiwtterDatabaseInMemoryAdapter
+        this.database = InMemoryMiwtterDatabase
         Assertions.assertNotNull(this.database)
     }
 

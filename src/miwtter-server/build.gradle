@@ -2,6 +2,8 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.4.32'
     // ASSUMES GRADLE 5.6 OR HIGHER. Use plugin version 0.8.10 with earlier gradle versions
     id 'com.google.protobuf' version '0.8.15'
+
+    id("org.jetbrains.dokka") version "1.4.32"
 }
 
 group 'es.uniovi.miw.miwtter'
@@ -16,6 +18,8 @@ repositories {
 }
 
 dependencies {
+    dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.4.32")
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation 'io.github.microutils:kotlin-logging-jvm:2.0.6'
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
