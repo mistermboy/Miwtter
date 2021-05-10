@@ -10,10 +10,6 @@ import kotlinx.coroutines.launch
 
 class FavViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is fav Fragment"
-    }
-    val text: LiveData<String> = _text
 
     private val _postsList: MutableLiveData<List<Miwtter.FeedPost>> by lazy {
         MutableLiveData<List<Miwtter.FeedPost>>()

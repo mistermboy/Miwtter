@@ -1,22 +1,17 @@
 package com.example.miwtter.ui.fav
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.danimeana.weatherapp.FeedListAdapter
+import com.danimeana.weatherapp.BookMarkListAdapter
 import com.example.miwtter.R
 import es.uniovi.miw.miwtter.Miwtter
-import es.uniovi.miw.miwtter.clients.FeedServiceClient
-import es.uniovi.miw.miwtter.persistence.LocalDatabaseRoomImpl
 
 class FavFragment : Fragment() {
 
@@ -35,10 +30,9 @@ class FavFragment : Fragment() {
         favList.layoutManager = LinearLayoutManager(activity)
 
 
-        //favViewModel.requestCreatePost(Miwtter.FeedPost.newBuilder().setOwnerName("Paco").setContent("Esdto es un fav post").setPostId("555").build())
         favViewModel.requestFavPosts()
         favViewModel.postsList.observe(viewLifecycleOwner) { postsList: List<Miwtter.FeedPost> ->
-            favList.adapter = FeedListAdapter(postsList)
+            favList.adapter = BookMarkListAdapter(postsList)
         }
         return view
     }

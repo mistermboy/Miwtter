@@ -7,18 +7,28 @@
     <string name="action_sign_in">Sign In</string>
     <string name="action_sign_up">Sign Up</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="error_login">Username or password are incorrect</string>
+    <string name="error_server">Server not available</string>
+    <string name="login_failed">Login failed</string>
+
+    <string name="required_field">Required Field!</string>
+    <string name="success_register">Succesfully registered!</string>
+    <string name="username_exists">Username already exists</string>
+
+    <string name="log_miwtter">Log in to Miwtter</string>
+    <string name="have_miwtter_account">Don´t you have an account?</string>
+
 
     <string name="prompt_name">Name</string>
     <string name="prompt_surname">Surname</string>
 
-    <string name="degrees">%1$.1fº</string>
-    <string name="title_home">Home</string>
+    <string name="title_home">Feed</string>
     <string name="title_fav">Bookmars</string>
     <string name="title_profile">Profile</string>
-    <string name="title_create">Post</string>
-    <string name="title_post">Post</string>
+    <string name="title_create">New Post</string>
+    <string name="title_post">New Post</string>
+    <string name="posted">Posted</string>
 </resources>

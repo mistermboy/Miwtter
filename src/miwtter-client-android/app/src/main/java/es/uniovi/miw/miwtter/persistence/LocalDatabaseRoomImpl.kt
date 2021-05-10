@@ -1,6 +1,5 @@
 package es.uniovi.miw.miwtter.persistence
 
-import android.content.Context
 import androidx.room.Room
 import com.example.miwtter.App
 import es.uniovi.miw.miwtter.Miwtter

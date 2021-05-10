@@ -4,7 +4,6 @@ import es.uniovi.miw.miwtter.Miwtter
 import es.uniovi.miw.miwtter.UsersServiceGrpc
 import io.grpc.ConnectivityState
 import io.grpc.ManagedChannelBuilder
-import java.lang.IllegalStateException
 
 /**
  * The user service client acts as a facade of the gRPC implementation for the communication

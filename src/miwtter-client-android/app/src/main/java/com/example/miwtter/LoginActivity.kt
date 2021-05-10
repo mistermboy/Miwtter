@@ -26,28 +26,38 @@ class LoginActivity : AppCompatActivity() {
                         .setUsername(username)
                         .setPassword(password)
                         .build()
-                val response = service.login(request)
-                when (response.responseStatus) {
-                    Miwtter.LoginUserResponse.ResponseStatus.SUCCESS -> {
+                try {
+                    val response = service.login(request)
 
-                        val findRequest = Miwtter.FindUserRequest.newBuilder()
-                            .setFindPolicy(Miwtter.FindUserRequest.FindPolicy.AND)
-                            .setUsername(username)
-                            .build()
+                    when (response.responseStatus) {
+                        Miwtter.LoginUserResponse.ResponseStatus.SUCCESS -> {
 
-                        val user = service.find(findRequest)
-                        Settings(this).username = username
-                        Settings(this).name = user.userList.get(0).name
-                        Settings(this).surname = user.userList.get(0).surname
+                            val findRequest = Miwtter.FindUserRequest.newBuilder()
+                                .setFindPolicy(Miwtter.FindUserRequest.FindPolicy.AND)
+                                .setUsername(username)
+                                .build()
 
-                        startActivity(Intent(this, HomeActivity::class.java))
-                        Toast.makeText(this, "Welcome!", Toast.LENGTH_SHORT).show()
+                            val user = service.find(findRequest)
+                            Settings(this).username = username
+                            Settings(this).name = user.userList.get(0).name
+                            Settings(this).surname = user.userList.get(0).surname
+
+                            startActivity(Intent(this, HomeActivity::class.java))
+                            Toast.makeText(this, getString(R.string.welcome), Toast.LENGTH_SHORT).show()
+                        }
+
+                        Miwtter.LoginUserResponse.ResponseStatus.INCORRECT_USERNAME_OR_PASSWORD -> {
+                            Toast.makeText(
+                                this,
+                                getString(R.string.error_login),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
-
-                    Miwtter.LoginUserResponse.ResponseStatus.INCORRECT_USERNAME_OR_PASSWORD -> {
-                        Toast.makeText(this, "Username or password are incorrect", Toast.LENGTH_SHORT).show()
-                    }
+                }catch (e:Exception){
+                    Toast.makeText(this, getString(R.string.error_server), Toast.LENGTH_SHORT).show()
                 }
+
             }
         }
         binding.signUpTxt.setOnClickListener{ startActivity(Intent(this,SignUpActivity::class.java)) }
@@ -59,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun validateUsername(): Boolean {
         if (binding.username.editText?.text.toString().trim().isEmpty()) {
-            binding.username.error = "Required Field!"
+            binding.username.error = getString(R.string.required_field)
             binding.username.requestFocus()
             return false
         }
@@ -69,7 +79,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun validatePassword(): Boolean {
         if (binding.password.editText?.text.toString().trim().isEmpty()) {
-            binding.password.error = "Required Field!"
+            binding.password.error = getString(R.string.required_field)
             binding.password.requestFocus()
             return false
         }

@@ -4,7 +4,6 @@ import es.uniovi.miw.miwtter.Miwtter
 import org.junit.Assert.fail
 import org.junit.Ignore
 import org.junit.Test
-import java.lang.Exception
 
 internal class FeedServiceClientIntegrationTest {
 

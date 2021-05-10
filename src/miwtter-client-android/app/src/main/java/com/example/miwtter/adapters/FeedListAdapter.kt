@@ -4,12 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.miwtter.App
 import com.example.miwtter.R
-import com.example.miwtter.ui.fav.FavViewModel
 import com.example.miwtter.ui.fav.PostsList
 import com.like.LikeButton
 import com.like.OnLikeListener

@@ -2,7 +2,6 @@ package es.uniovi.miw.miwtter.clients
 
 import org.junit.Assert.fail
 import org.junit.Test
-import java.lang.Exception
 
 class PostsServiceClientIntegrationTest {
 

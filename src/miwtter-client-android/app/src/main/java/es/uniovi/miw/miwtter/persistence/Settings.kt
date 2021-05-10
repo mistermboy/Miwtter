@@ -2,7 +2,6 @@ package es.uniovi.miw.miwtter.persistence
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.miwtter.ui.profile.ProfileFragment
 
 class Settings(context: Context) {
     companion object {

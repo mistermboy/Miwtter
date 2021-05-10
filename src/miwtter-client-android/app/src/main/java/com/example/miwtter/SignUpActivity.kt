@@ -1,16 +1,11 @@
 package com.example.miwtter
 
-import android.R
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.miwtter.databinding.ActivitySignupBinding
-import com.google.android.material.textfield.TextInputLayout
 import es.uniovi.miw.miwtter.Miwtter
 import es.uniovi.miw.miwtter.clients.UsersServiceClient
 
@@ -46,10 +41,10 @@ class SignUpActivity : AppCompatActivity() {
                     Miwtter.RegisterUserResponse.ResponseStatus.USER_CREATED -> {
                         Log.i("USER_CREATED", "Name: " + name + " Surname: " + surname + " Username: " + username + " Password: " + password)
                         startActivity(Intent(this, LoginActivity::class.java))
-                        Toast.makeText(this, "Succesfully registered!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this,getString(com.example.miwtter.R.string.success_register), Toast.LENGTH_SHORT).show()
                     }
                     Miwtter.RegisterUserResponse.ResponseStatus.USERNAME_ALREADY_EXISTS ->{
-                        binding.username.error = "Username already exists"
+                        binding.username.error = getString(com.example.miwtter.R.string.username_exists)
                         binding.username.requestFocus()
                     }
                 }
@@ -63,7 +58,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun validateName(): Boolean {
         if (binding.name.editText?.text.toString().trim().isEmpty()) {
-            binding.name.error = "Required Field!"
+            binding.name.error = getString(com.example.miwtter.R.string.required_field)
             binding.name.requestFocus()
             return false
         }
@@ -73,7 +68,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun validateSurname(): Boolean {
         if (binding.surname.editText?.text.toString().trim().isEmpty()) {
-            binding.surname.error = "Required Field!"
+            binding.surname.error = getString(com.example.miwtter.R.string.required_field)
             binding.surname.requestFocus()
             return false
         }
@@ -83,7 +78,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun validateUsername(): Boolean {
         if (binding.username.editText?.text.toString().trim().isEmpty()) {
-            binding.username.error = "Required Field!"
+            binding.username.error = getString(com.example.miwtter.R.string.required_field)
             binding.username.requestFocus()
             return false
         }
@@ -93,7 +88,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun validatePassword(): Boolean {
         if (binding.password.editText?.text.toString().trim().isEmpty()) {
-            binding.password.error = "Required Field!"
+            binding.password.error = getString(com.example.miwtter.R.string.required_field)
             binding.password.requestFocus()
             return false
         }

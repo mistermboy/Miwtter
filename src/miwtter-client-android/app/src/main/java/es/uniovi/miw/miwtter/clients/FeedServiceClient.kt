@@ -4,7 +4,6 @@ import es.uniovi.miw.miwtter.FeedServiceGrpc
 import es.uniovi.miw.miwtter.Miwtter
 import io.grpc.ConnectivityState
 import io.grpc.ManagedChannelBuilder
-import java.lang.IllegalStateException
 
 /**
  * The feed service client acts as a facade of the gRPC implementation for the communication

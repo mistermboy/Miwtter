@@ -47,26 +47,6 @@
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <com.like.LikeButton
-            android:id="@+id/like_button"
-            android:layout_width="23dp"
-            android:layout_height="23dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="5dp"
-            android:background="@android:color/transparent"
-            card_view:dots_primary_color="@color/twitterBlue"
-            card_view:dots_secondary_color="@color/twitterBlueDarker"
-            card_view:icon_size="10dp"
-            card_view:icon_type="heart"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintHorizontal_bias="0.765"
-            card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/post_text"
-            card_view:layout_constraintVertical_bias="0.0"
-            card_view:like_drawable="@drawable/heart_like"
-            card_view:unlike_drawable="@drawable/heart_unlike" />
-
-        <com.like.LikeButton
             android:id="@+id/star_button"
             android:layout_width="23dp"
             android:layout_height="23dp"
@@ -85,18 +65,6 @@
             card_view:layout_constraintVertical_bias="1.0"
             card_view:like_drawable="@drawable/star_like"
             card_view:unlike_drawable="@drawable/star_unlike" />
-
-        <TextView
-            android:id="@+id/num_likes"
-            android:layout_width="27dp"
-            android:layout_height="16dp"
-            android:text="100"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintHorizontal_bias="0.203"
-            card_view:layout_constraintStart_toEndOf="@+id/like_button"
-            card_view:layout_constraintTop_toBottomOf="@+id/post_text"
-            card_view:layout_constraintVertical_bias="0.40" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
