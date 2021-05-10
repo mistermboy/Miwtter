@@ -4,12 +4,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.example.miwtter.App
 import com.example.miwtter.R
+import com.example.miwtter.ui.fav.FavViewModel
+import com.example.miwtter.ui.fav.PostsList
 import com.like.LikeButton
 import com.like.OnLikeListener
 import es.uniovi.miw.miwtter.Miwtter
 import es.uniovi.miw.miwtter.clients.PostServiceClient
+import es.uniovi.miw.miwtter.persistence.Settings
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 
 class FeedListAdapter(val items: List<Miwtter.FeedPost>) :
     RecyclerView.Adapter<FeedListAdapter.ViewHolder>() {
@@ -22,6 +30,7 @@ class FeedListAdapter(val items: List<Miwtter.FeedPost>) :
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.feed_item, parent, false) as CardView
 
+
         return ViewHolder(view)
     }
 
@@ -30,11 +39,24 @@ class FeedListAdapter(val items: List<Miwtter.FeedPost>) :
         holder.cardView.findViewById<TextView>(R.id.post_text).text = items[position].content
         holder.cardView.findViewById<TextView>(R.id.num_likes).text = items[position].numberOfLikes.toString()
 
+        val post = Miwtter.FeedPost.newBuilder()
+            .setOwnerName(items[position].ownerName)
+            .setPostId(items[position].postId)
+            .setContent(items[position].content)
+            .setOwnerUsername(items[position].ownerUsername)
+            .build()
+        GlobalScope.async  {
+            if(PostsList.requestFavPosts().contains(post)) {
+                holder.cardView.findViewById<LikeButton>(R.id.star_button).isLiked = true
+            }
+        }
+
+
         holder.cardView.findViewById<LikeButton>(R.id.like_button).setOnLikeListener(object : OnLikeListener {
             override fun liked(likeButton: LikeButton) {
                 val service = PostServiceClient
                 val request = Miwtter.LikePostRequest.newBuilder()
-                    .setActorUsername("labra")
+                    .setActorUsername(Settings(App.instance).username)
                     .setPostId(items[position].postId)
                     .build()
                 service.addLike(request)
@@ -43,11 +65,35 @@ class FeedListAdapter(val items: List<Miwtter.FeedPost>) :
             override fun unLiked(likeButton: LikeButton) {
                 val service = PostServiceClient
                 val request = Miwtter.RemoveLikeRequest.newBuilder()
-                    .setActorUsername("labra")
+                    .setActorUsername(Settings(App.instance).username)
                     .setPostId(items[position].postId)
                     .build()
                 service.removeLike(request)
                 holder.cardView.findViewById<TextView>(R.id.num_likes).text = Integer.toString(items[position].numberOfLikes)
+            }
+        })
+
+        holder.cardView.findViewById<LikeButton>(R.id.star_button).setOnLikeListener(object : OnLikeListener {
+            override fun liked(likeButton: LikeButton) {
+                val post = Miwtter.FeedPost.newBuilder()
+                    .setOwnerName(items[position].ownerName)
+                    .setPostId(items[position].postId)
+                    .setContent(items[position].content)
+                    .setOwnerUsername(items[position].ownerUsername)
+                    .build()
+
+                GlobalScope.async  {  PostsList.createFavPost(post)}
+            }
+            override fun unLiked(likeButton: LikeButton) {
+                val post = Miwtter.FeedPost.newBuilder()
+                    .setOwnerName(items[position].ownerName)
+                    .setPostId(items[position].postId)
+                    .setContent(items[position].content)
+                    .setOwnerUsername(items[position].ownerUsername)
+                    .build()
+                 GlobalScope.async {
+                     PostsList.removeFavPost(post)
+                 }
             }
         })
 

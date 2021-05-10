@@ -46,5 +46,9 @@ class PostsList() {
         suspend fun createFavPost(feedPost:Miwtter.FeedPost) {
             LocalDatabaseRoomImpl.addPost(feedPost)
         }
+
+        suspend fun removeFavPost(feedPost:Miwtter.FeedPost) {
+            LocalDatabaseRoomImpl.removePost(feedPost.postId)
+        }
     }
 }

@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.danimeana.weatherapp.FeedListAdapter
+import com.example.miwtter.App
 import com.example.miwtter.R
 import com.example.miwtter.ui.fav.FavFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -20,6 +21,7 @@ import es.uniovi.miw.miwtter.Miwtter
 import es.uniovi.miw.miwtter.clients.FeedServiceClient
 import es.uniovi.miw.miwtter.clients.PostServiceClient
 import es.uniovi.miw.miwtter.clients.UsersServiceClient
+import es.uniovi.miw.miwtter.persistence.Settings
 
 class FeedFragment : Fragment() {
 
@@ -38,7 +40,7 @@ class FeedFragment : Fragment() {
 
         val feedService = FeedServiceClient
         val request = Miwtter.GetFeedRequest.newBuilder().
-                setActorUsername("labra")
+                setActorUsername(Settings(App.instance).username)
                 .build()
 
         val response = feedService.getFeed(request)

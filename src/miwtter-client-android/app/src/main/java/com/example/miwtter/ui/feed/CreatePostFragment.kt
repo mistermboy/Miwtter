@@ -10,10 +10,12 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.miwtter.App
 import com.example.miwtter.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import es.uniovi.miw.miwtter.Miwtter
 import es.uniovi.miw.miwtter.clients.PostServiceClient
+import es.uniovi.miw.miwtter.persistence.Settings
 
 
 class CreatePostFragment : Fragment() {
@@ -35,7 +37,7 @@ class CreatePostFragment : Fragment() {
             val service = PostServiceClient
             val content = view.findViewById<TextView>(R.id.post_content_txt)
             val request = Miwtter.CreatePostRequest.newBuilder()
-                .setActorUsername("labra")
+                .setActorUsername(Settings(App.instance).username)
                 .setContent(content.text.toString())
                 .build()
 
